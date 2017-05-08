@@ -73,7 +73,7 @@ export class AppComponent implements OnInit {
     this.getHeroes();
   }
   getHeroes(): void {
-    this.heroes = this.heroservice.getHeroes(); // this is a synchronous call, use promises to utilize async
+    this.heroservice.getHeroes().then(heroes => this.heroes = heroes);
   }
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
