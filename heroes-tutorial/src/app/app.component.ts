@@ -1,18 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Hero } from './hero';
-
-const HEROES: Hero[] = [
-  {id: 11, name: 'Mr. Nice'},
-  {id: 12, name: 'Narco'},
-  {id: 13, name: 'Bombasto'},
-  {id: 14, name: 'Celeritas'},
-  {id: 15, name: 'Magenta'},
-  {id: 16, name: 'Rubberman'},
-  {id: 17, name: 'Dynama'},
-  {id: 18, name: 'Dr IQ'},
-  {id: 19, name: 'Magma'},
-  {id: 20, name: 'Tornado'},
-];
+import { HeroService } from './hero.service';
 
 @Component({
   selector: 'my-app',
@@ -26,6 +14,7 @@ const HEROES: Hero[] = [
     </ul>
     <hero-detail [hero]="selectedHero"></hero-detail>
     `,
+  providers: [HeroService],
   styles: [`
     .selected{
       background-color: #CFD8DC !important;
@@ -75,10 +64,17 @@ const HEROES: Hero[] = [
     }
     `]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Tour of Heroes';
   selectedHero: Hero;
-  heroes = HEROES;
+  heroes: Hero[];
+  constructor(private heroservice: HeroService) {}
+  ngOnInit(): void {
+    this.getHeroes();
+  }
+  getHeroes(): void {
+    this.heroes = this.heroservice.getHeroes(); // this is a synchronous call, use promises to utilize async
+  }
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
   }
