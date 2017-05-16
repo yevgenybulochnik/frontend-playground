@@ -1,4 +1,5 @@
 var path = require('path');
+var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
   entry: './app/index.js',
@@ -7,7 +8,15 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     publicPath: 'build/'
   },
-  devServer:{
-    disableHostCheck: true, //false causes invalid header 
-  }
+  plugins: [
+    new BrowserSyncPlugin({
+      host: 'localhost',
+      port: 3000,
+      proxy: 'http://localhost:8080'
+    })
+  ]
+  //devServer:{
+    //disableHostCheck: true, //false causes invalid header
+    //port: 3000,
+  //}
 };
