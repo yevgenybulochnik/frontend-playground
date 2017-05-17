@@ -1,12 +1,11 @@
 var path = require('path');
-var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
-  entry: './app/index.js',
+  entry: './app/index.js', //bundle entry point, starting file
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'build'),
-    publicPath: 'build/'
+    filename: 'bundle.js', //name of output bundle
+    path: path.resolve(__dirname, 'build'), //path to create bundle folder
+    publicPath: 'build/' //what folder to serve
   },
   devServer:{
     public: 'preview.bulochnik.com',
