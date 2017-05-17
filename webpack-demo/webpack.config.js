@@ -8,15 +8,8 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     publicPath: 'build/'
   },
-  plugins: [
-    new BrowserSyncPlugin({
-      host: 'localhost',
-      port: 3000,
-      proxy: 'http://localhost:8080'
-    })
-  ]
-  //devServer:{
-    //disableHostCheck: true, //false causes invalid header
-    //port: 3000,
-  //}
+  devServer:{
+    public: 'preview.bulochnik.com',
+    port: 3000,
+  }
 };
