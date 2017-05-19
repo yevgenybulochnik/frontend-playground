@@ -1,4 +1,5 @@
 var path = require('path');
+var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -12,6 +13,10 @@ module.exports = {
     new HtmlWebpackPlugin({ // required to inject script tags into base index.html
       template: 'index.html', //public path needs to be /
       inject: 'body'
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jquery: 'jquery'
     })
   ],
   devServer:{

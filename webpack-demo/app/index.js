@@ -6,3 +6,4 @@ document.body.appendChild(element);
 
 greeter("Hello this is a greeting", "red");
 greeter("This is another greeting", "lightblue");
+$('body').append('<div> jquery test </div>');
