@@ -9,12 +9,31 @@ module.exports = {
     path: path.resolve(__dirname, 'build'), //path to create bundle folder
     publicPath: '/' //what folder to serve, if removed default "" or same as index.html
   },
+  resolve: {
+    extensions: ['.ts', '.js']
+  },
+  devtool: "inline-source-map",
+  module: {
+    rules: [
+      {
+        enforce: "pre",
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: "tslint-loader"
+      },
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: "awesome-typescript-loader"
+      }
+    ]
+  },
   plugins: [
     new HtmlWebpackPlugin({ // required to inject script tags into base index.html
       template: 'index.html', //public path needs to be /
       inject: 'body'
     }),
-    new webpack.ProvidePlugin({
+    new webpack.ProvidePlugin({ //global jquery library
       $: 'jquery',
       jquery: 'jquery'
     })
