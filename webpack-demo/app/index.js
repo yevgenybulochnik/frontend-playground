@@ -1,5 +1,5 @@
 import { greeter } from './greeter';
-import { Button } from '.button.component';
+import { Button } from './button.component';
 
 var element = document.createElement('div');
 element.innerHTML = 'Welcome to webpack demo!';
