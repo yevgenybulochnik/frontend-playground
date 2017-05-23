@@ -7,6 +7,4 @@ import '@angular/http';
 import '@angular/router';
 import '@angular/forms';
 
-import 'core-js';
 import 'rxjs';
-import 'zone.js';

@@ -4,8 +4,7 @@ import { Component } from '@angular/core';
   selector: 'my-app',
   template: `
     <h1>{{title}}</h1>
-    <div>test div</div>
-    <div>test div</div>
+    <div>{{name}}</div>
   `,
   styles: [`
     div {
@@ -15,4 +14,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Angular 2 and webpack';
+  name = 'testing webpack';
 }

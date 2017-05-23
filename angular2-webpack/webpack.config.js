@@ -5,10 +5,11 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: {
     app: './src/main.ts',
-    vendor: './src/vender.ts'
+    vendor: './src/vender.ts',
+    polyfills: './src/polyfills.ts'
   }, //bundle entry point, starting file
   output: {
-    filename: '[name].bundle.js', //name of output bundle
+    filename: '[name].js', //name of output bundle
     path: path.resolve(__dirname, 'build'), //path to create bundle folder
     publicPath: '/' //what folder to serve, if removed default "" or same as index.html
   },
@@ -34,9 +35,14 @@ module.exports = {
       template: './src/index.html', //public path needs to be /
       inject: 'body'
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name:['app','vendor','polyfills']
+    })
   ],
   devServer:{
     public: 'preview.bulochnik.com',
     port: 3000,
+    compress: true,
+    stats: 'minimal'
   }
 };
