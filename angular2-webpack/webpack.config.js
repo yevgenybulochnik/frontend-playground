@@ -45,7 +45,11 @@ module.exports = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name:['app','vendor','polyfills']
-    })
+    }),
+    new webpack.ContextReplacementPlugin( //necessary to resolve core.es5.js warnings
+      /angular(\\|\/)core(\\|\/)@angular/,
+      path.resolve(__dirname, '../src')
+    )
   ],
   devServer:{
     public: 'preview.bulochnik.com',

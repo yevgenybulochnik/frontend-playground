@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { AppComponent } from './app.component';
   ],
   declarations: [
     AppComponent,
+    ButtonComponent
   ],
   providers: [
   ],
