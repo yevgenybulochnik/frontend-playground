@@ -11,6 +11,7 @@
   "author": "Yevgeny Bulochnik",
   "license": "ISC",
   "devDependencies": {
+    "@types/d3": "^4.10.0",
     "@types/node": "^7.0.22",
     "angular2-template-loader": "^0.6.2",
     "awesome-typescript-loader": "^3.1.3",
@@ -33,6 +34,7 @@
     "@angular/platform-browser-dynamic": "^4.1.3",
     "@angular/router": "^4.1.3",
     "core-js": "^2.4.1",
+    "d3": "^4.10.0",
     "rxjs": "^5.4.0",
     "zone.js": "^0.8.11"
   }
