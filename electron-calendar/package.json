@@ -4,7 +4,7 @@
   "description": "Data Analysis Calendar Heatmap",
   "main": "main.ts",
   "scripts": {
-    "serve": "./node_modules/.bin/webpack-dev-server",
+    "serve-public": "./node_modules/.bin/webpack-dev-server --public preview.bulochnik.com",
     "serve-local": "./node_modules/.bin/webpack-dev-server --host 192.168.2.21"
   },
   "keywords": [],

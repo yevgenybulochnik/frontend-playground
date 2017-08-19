@@ -55,7 +55,6 @@ module.exports = {
     )
   ],
   devServer:{
-    public: 'preview.bulochnik.com',
     port: 3000,
     compress: true,
     stats: 'minimal'
