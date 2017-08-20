@@ -32,6 +32,10 @@ module.exports = {
         loader: 'file-loader?name=assets/[name].[hash].[ext]'
       },
       {
+        test: /\.csv$/,
+        loader: 'dsv-loader'
+      },
+      {
         test: /\.css$/,
         loader: 'raw-loader'
       },
