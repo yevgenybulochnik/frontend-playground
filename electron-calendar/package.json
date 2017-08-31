@@ -4,8 +4,8 @@
   "description": "Data Analysis Calendar Heatmap",
   "main": "main.ts",
   "scripts": {
-    "serve-public": "./node_modules/.bin/webpack-dev-server --public preview.bulochnik.com",
-    "serve-local": "./node_modules/.bin/webpack-dev-server --host 192.168.2.21"
+    "sp": "./node_modules/.bin/webpack-dev-server --public preview.bulochnik.com",
+    "sl": "./node_modules/.bin/webpack-dev-server --host 192.168.2.21"
   },
   "keywords": [],
   "author": "Yevgeny Bulochnik",
