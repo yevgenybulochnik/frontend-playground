@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { ChartComponent } from './chart/chart.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   imports: [
@@ -13,7 +13,7 @@ import { ChartComponent } from './chart/chart.component';
   ],
   declarations: [
     AppComponent,
-    ChartComponent
+    CalendarComponent
   ],
   providers: [
   ],

@@ -6,9 +6,9 @@ import * as moment from 'moment';
   selector: 'd3-chart',
   template: `
   `,
-  styleUrls: ['./chart.component.sass']
+  styleUrls: ['./calendar.component.sass']
 })
-export class ChartComponent {
+export class CalendarComponent {
   constructor(private elRef: ElementRef) {}
   ngAfterViewInit() {
   }
