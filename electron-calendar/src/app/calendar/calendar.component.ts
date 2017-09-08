@@ -20,23 +20,22 @@ export class CalendarComponent {
   private cellPadding = 3;
   private width = 1300;
   private height = (this.cellSize + this.cellPadding) * 8;
-  private dateForm = 'MM/DD/YYYY';
 
   // D3 variables
   private svg: any;
   private months: any;
   private dayCells: any;
 
-  // Input Variables
+  // Date Variables
   private firstDate: any;
   private lastDate: any;
+  private dateRange: any;
+  private dateForm = 'MM/DD/YYYY';
 
   constructor() {
   }
 
   ngOnInit() {
-   this.firstDate = moment(this.data[0].date, this.dateForm).toDate()
-   this.lastDate = moment(this.data[this.data.length - 1].date, this.dateForm).toDate()
   }
 
   ngAfterViewInit() {
@@ -44,17 +43,25 @@ export class CalendarComponent {
     this.svg = d3.select(element.nativeElement).append('svg')
       .attr('width', this.width)
       .attr('height', this.height)
+    this.generateDateRange()
     this.generateMonths()
     this.generateDays()
   }
 
+  generateDateRange() {
+    let dataYear = moment(this.data[0].date, this.dateForm).format('YYYY')
+    this.firstDate = moment('01/01/' + dataYear, this.dateForm)
+    this.lastDate = moment('12/31/' + dataYear, this.dateForm).add(1, 'day')
+    this.dateRange = d3.timeDay.range(this.firstDate, this.lastDate)
+  }
+
   generateMonths() {
-    let days = d3.timeDay.range(this.firstDate, this.lastDate) // Note: move generated dates to seperate function? see line 38-39
-    let mgroup = d3.nest().key(function(d: any) { return moment(d).format('MMM') }).entries(days)
+    let mgroup = d3.nest().key(function(d: any) { return moment(d).format('MMM') }).entries(this.dateRange)
     this.months = this.svg.selectAll('g')
       .data(mgroup)
       .enter().append('g')
-        .attr('class', function(d: any) {return d.keys})
+        .attr('class', 'months')
+        .attr('id', function(d: any) {return d.key})
   }
 
   generateDays() {

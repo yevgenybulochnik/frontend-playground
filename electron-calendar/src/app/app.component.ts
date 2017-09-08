@@ -8,7 +8,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class AppComponent {
   data = [
-    {date: '01/01/2017', count: 10},
-    {date: '01/01/2018', count: 20},
+    {date: '10/01/2017', count: 10},
+    {date: '3/10/2017', count: 20},
   ]
 }
