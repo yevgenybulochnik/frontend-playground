@@ -24,6 +24,7 @@ export class CalendarComponent {
   // D3 variables
   private svg: any;
   private months: any;
+  private monthLabels: any;
   private dayCells: any;
 
   // Date Variables
@@ -46,6 +47,7 @@ export class CalendarComponent {
     this.generateDateRange()
     this.generateMonths()
     this.generateDays()
+    this.generateMonthLabels()
   }
 
   generateDateRange() {
@@ -63,12 +65,33 @@ export class CalendarComponent {
   }
 
   generateMonths() {
+    let cellTotal = this.cellSize + this.cellPadding
     let mgroup = d3.nest().key(function(d: any) { return moment(d).format('MMM') }).entries(this.dateRange)
     this.months = this.svg.selectAll('g')
       .data(mgroup)
       .enter().append('g')
         .attr('class', 'months')
         .attr('id', function(d: any) {return d.key})
+        .attr('transform', function(d: any, i: any) {
+          let space = cellTotal * i
+          return `translate(${space}, 0)`
+        })
+  }
+
+  generateMonthLabels() {
+    // x position for first of each month
+    let firstXrect = this.svg.selectAll('rect').filter(function(d: any) { return moment(d).format('D') === '1' })
+    let firstX: number[] = []
+    firstXrect.each(function(d: any) {
+      let xValue = d3.select(this).attr('x')
+      firstX.push(Number(xValue))
+    })
+    this.monthLabels = this.months.append('text')
+      .text(function(d: any) {return d.key})
+      .attr('y', 12)
+      .attr('class', 'monthLabel')
+    this.monthLabels.data(firstX)
+      .attr('x', function(d: any) {return d + 40})
   }
 
   generateDays() {
