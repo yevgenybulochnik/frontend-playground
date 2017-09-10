@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { ToolTipComponent } from './tooltip/tooltip.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { CalendarComponent } from './calendar/calendar.component';
   ],
   declarations: [
     AppComponent,
-    CalendarComponent
+    CalendarComponent,
+    ToolTipComponent
   ],
   providers: [
   ],

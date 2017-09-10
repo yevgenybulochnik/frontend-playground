@@ -5,7 +5,9 @@ import * as moment from 'moment';
 @Component({
   selector: 'd3-calendar',
   template: `
-  <div #container class='container'></div>
+  <div #container class='container'>
+    <tooltip></tooltip>
+  </div>
   `,
   styleUrls: ['./calendar.component.sass']
 })
@@ -26,6 +28,7 @@ export class CalendarComponent {
   private months: any;
   private monthLabels: any;
   private dayCells: any;
+  private toolTip: any;
 
   // Date Variables
   private firstDate: any;
@@ -48,6 +51,7 @@ export class CalendarComponent {
     this.generateMonths()
     this.generateDays()
     this.generateMonthLabels()
+    this.generateToolTip()
   }
 
   generateDateRange() {
@@ -111,5 +115,24 @@ export class CalendarComponent {
           return result * cellTotal
         })
         .text(function(d: any) {return moment(d).format('MMM Do YYYY')})
+  }
+  generateToolTip() {
+    this.toolTip = d3.select('tooltip')
+      .style('opacity', 0)
+    let tip = this.toolTip
+    this.dayCells.on('mouseover', function(d: any) {
+      let elem = d3.select(this)
+      let matrix = elem['_groups'][0][0].getScreenCTM().translate(+elem['_groups'][0][0].getAttribute('x'), + elem['_groups'][0][0].getAttribute('y'))
+      tip.transition()
+        .duration(0)
+        .style('opacity', 0.8)
+        .style('left', (window.pageXOffset + matrix.e - 72) + 'px')
+        .style('top', (window.pageYOffset + matrix.f - 48) + 'px')
+    })
+    .on('mouseout', function(d: any) {
+      tip.transition()
+        .duration(0)
+        .style('opacity', 0)
+    })
   }
 }
