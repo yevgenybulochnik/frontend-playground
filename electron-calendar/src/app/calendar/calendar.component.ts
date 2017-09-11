@@ -116,6 +116,7 @@ export class CalendarComponent {
         })
         .text(function(d: any) {return moment(d).format('MMM Do YYYY')})
   }
+
   generateToolTip() {
     this.toolTip = d3.select('tooltip')
       .style('opacity', 0)
