@@ -118,7 +118,8 @@ export class CalendarComponent {
   }
 
   generateToolTip() {
-    this.toolTip = d3.select('tooltip')
+    let element = this.element
+    this.toolTip = d3.select(element.nativeElement).select('tooltip')
       .style('opacity', 0)
     let tip = this.toolTip
     this.dayCells.on('mouseover', function(d: any) {
