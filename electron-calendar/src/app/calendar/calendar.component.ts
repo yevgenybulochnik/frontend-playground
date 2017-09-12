@@ -18,7 +18,7 @@ export class CalendarComponent {
   @Input() data: any;
 
   // Default values
-  private cellSize = 15;
+  private cellSize = 11;
   private cellPadding = 3;
   private width = 1300;
   private height = (this.cellSize + this.cellPadding) * 8;
@@ -27,6 +27,7 @@ export class CalendarComponent {
   private svg: any;
   private months: any;
   private monthLabels: any;
+  private weekDayLabels: any;
   private dayCells: any;
   private toolTip: any;
   private toolTipData: any;
@@ -52,6 +53,7 @@ export class CalendarComponent {
     this.generateMonths()
     this.generateDays()
     this.generateMonthLabels()
+    this.generateDayLabels()
     this.generateToolTip()
   }
 
@@ -92,10 +94,11 @@ export class CalendarComponent {
     })
     this.monthLabels = this.months.append('text')
       .text(function(d: any) {return d.key})
-      .attr('y', 12)
+      .attr('y', this.cellSize + 'px')
       .attr('class', 'monthLabel')
+      .attr('font-size', this.cellSize + 'px')
     this.monthLabels.data(firstX)
-      .attr('x', function(d: any) {return d + 40})
+      .attr('x', (d: any) => {return d + (this.cellSize + this.cellPadding) * 2})
   }
 
   generateDays() {
@@ -110,9 +113,23 @@ export class CalendarComponent {
           let cellDate = moment(d)
           let firstDate = moment(this.firstDate)
           let result = cellDate.week() - firstDate.week() + (firstDate.weeksInYear() * (cellDate.weekYear() - firstDate.weekYear()))
-          return result * (this.cellSize + this.cellPadding)
+          return result * (this.cellSize + this.cellPadding) + this.cellSize + this.cellPadding
         })
         .text(function(d: any) {return moment(d).format('MMM Do YYYY')})
+  }
+
+  generateDayLabels() {
+    let labels = ['M', 'W', 'F']
+    this.weekDayLabels = this.svg.selectAll('text.weekday')
+      .data(labels)
+      .enter().append('text')
+      .attr('y', (d: any, i: any) => {
+        return (i * 2) * (this.cellSize + this.cellPadding) + (this.cellSize + this.cellPadding) * 2
+      })
+      .attr('font-size', this.cellSize + 'px')
+      .attr('dominant-baseline', 'text-before-edge')
+      .attr('class', 'dayLabel')
+      .text(function(d: any) {return d})
   }
 
   generateToolTip() {
