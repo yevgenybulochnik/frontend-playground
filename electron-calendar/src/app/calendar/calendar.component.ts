@@ -6,7 +6,7 @@ import * as moment from 'moment';
   selector: 'd3-calendar',
   template: `
   <div #container class='container'>
-    <tooltip></tooltip>
+    <tooltip [data]='toolTipData'></tooltip>
   </div>
   `,
   styleUrls: ['./calendar.component.sass']
@@ -29,6 +29,7 @@ export class CalendarComponent {
   private monthLabels: any;
   private dayCells: any;
   private toolTip: any;
+  private toolTipData: any;
 
   // Date Variables
   private firstDate: any;
@@ -69,15 +70,14 @@ export class CalendarComponent {
   }
 
   generateMonths() {
-    let cellTotal = this.cellSize + this.cellPadding
     let mgroup = d3.nest().key(function(d: any) { return moment(d).format('MMM') }).entries(this.dateRange)
     this.months = this.svg.selectAll('g')
       .data(mgroup)
       .enter().append('g')
         .attr('class', 'months')
         .attr('id', function(d: any) {return d.key})
-        .attr('transform', function(d: any, i: any) {
-          let space = cellTotal * i
+        .attr('transform', (d: any, i: any) => {
+          let space = (this.cellSize + this.cellPadding) * i
           return `translate(${space}, 0)`
         })
   }
@@ -99,20 +99,18 @@ export class CalendarComponent {
   }
 
   generateDays() {
-    let cellTotal = this.cellSize + this.cellPadding
-    let fDate = this.firstDate
     this.dayCells = this.months.selectAll('rect')
       .data(function(d: any) {return d.values})
       .enter().append('rect')
         .attr('width', this.cellSize)
         .attr('height', this.cellSize)
         .attr('class', 'dateBox')
-        .attr('y', function(d: any) {return (d.getDay() * cellTotal) + cellTotal})
-        .attr('x', function(d: any) {
+        .attr('y', (d: any) => {return (d.getDay() * (this.cellSize + this.cellPadding)) + (this.cellSize + this.cellPadding)})
+        .attr('x', (d: any)  => {
           let cellDate = moment(d)
-          let firstDate = moment(fDate)
+          let firstDate = moment(this.firstDate)
           let result = cellDate.week() - firstDate.week() + (firstDate.weeksInYear() * (cellDate.weekYear() - firstDate.weekYear()))
-          return result * cellTotal
+          return result * (this.cellSize + this.cellPadding)
         })
         .text(function(d: any) {return moment(d).format('MMM Do YYYY')})
   }
@@ -122,7 +120,7 @@ export class CalendarComponent {
     this.toolTip = d3.select(element.nativeElement).select('tooltip')
       .style('opacity', 0)
     let tip = this.toolTip
-    this.dayCells.on('mouseover', function(d: any) {
+    this.dayCells.on('mouseover.position', function(d: any) {
       let elem = d3.select(this)
       let matrix = elem['_groups'][0][0].getScreenCTM().translate(+elem['_groups'][0][0].getAttribute('x'), + elem['_groups'][0][0].getAttribute('y'))
       tip.transition()
@@ -131,6 +129,9 @@ export class CalendarComponent {
         .style('left', (window.pageXOffset + matrix.e - 72) + 'px')
         .style('top', (window.pageYOffset + matrix.f - 48) + 'px')
     })
+      .on('mouseover.data', (d: any) => {
+        this.toolTipData = moment(d).format('LL')
+      })
     .on('mouseout', function(d: any) {
       tip.transition()
         .duration(0)

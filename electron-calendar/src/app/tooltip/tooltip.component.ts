@@ -1,9 +1,10 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'tooltip',
   template: `
   <div class='tooltip'>
+    <div>{{data}}</div>
   </div>
   `,
   styles: [`
@@ -16,7 +17,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
       height: 2.5em;
       background-color: black;
       position: absolute;
-      border-radius: 1em;
+      border-radius: 0.2em;
       color: white;
     }
     .tooltip::after {
@@ -32,4 +33,5 @@ import { Component, ViewEncapsulation } from '@angular/core';
     `]
 })
 export class ToolTipComponent {
+  @Input() data: any;
 }
