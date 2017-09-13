@@ -20,6 +20,8 @@ export class CalendarComponent {
   // Default values
   private cellSize = 11;
   private cellPadding = 3;
+  private topGutter = this.cellSize + this.cellPadding + 2;
+  private leftGutter = this.cellSize + this.cellPadding + 1;
   private width = 1300;
   private height = (this.cellSize + this.cellPadding) * 8;
 
@@ -108,12 +110,12 @@ export class CalendarComponent {
         .attr('width', this.cellSize)
         .attr('height', this.cellSize)
         .attr('class', 'dateBox')
-        .attr('y', (d: any) => {return (d.getDay() * (this.cellSize + this.cellPadding)) + (this.cellSize + this.cellPadding)})
+        .attr('y', (d: any) => {return (d.getDay() * (this.cellSize + this.cellPadding)) + this.topGutter})
         .attr('x', (d: any)  => {
           let cellDate = moment(d)
           let firstDate = moment(this.firstDate)
           let result = cellDate.week() - firstDate.week() + (firstDate.weeksInYear() * (cellDate.weekYear() - firstDate.weekYear()))
-          return result * (this.cellSize + this.cellPadding) + this.cellSize + this.cellPadding
+          return result * (this.cellSize + this.cellPadding) + this.leftGutter
         })
         .text(function(d: any) {return moment(d).format('MMM Do YYYY')})
   }
@@ -124,7 +126,7 @@ export class CalendarComponent {
       .data(labels)
       .enter().append('text')
       .attr('y', (d: any, i: any) => {
-        return (i * 2) * (this.cellSize + this.cellPadding) + (this.cellSize + this.cellPadding) * 2
+        return (i * 2) * (this.cellSize + this.cellPadding) + this.topGutter + (this.cellSize + this.cellPadding)
       })
       .attr('font-size', this.cellSize + 'px')
       .attr('dominant-baseline', 'text-before-edge')
