@@ -33,6 +33,7 @@ export class CalendarComponent {
   private dayCells: any;
   private toolTip: any;
   private toolTipData: any;
+  private colorScale: any;
 
   // Date Variables
   private firstDate: any;
@@ -57,6 +58,7 @@ export class CalendarComponent {
     this.generateMonthLabels()
     this.generateDayLabels()
     this.generateToolTip()
+    this.generateColorScale()
   }
 
   generateDateRange() {
@@ -156,5 +158,11 @@ export class CalendarComponent {
         .duration(0)
         .style('opacity', 0)
     })
+  }
+
+  generateColorScale() {
+    this.colorScale = d3.scaleLinear<string>()
+      .domain([0, 24, 30, 45])
+      .range(['white', 'yellow', 'green', 'red'])
   }
 }
