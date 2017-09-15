@@ -22,7 +22,7 @@ export class CalendarComponent {
   private cellPadding = 3;
   private topGutter = this.cellSize + this.cellPadding + 2;
   private leftGutter = this.cellSize + this.cellPadding + 1;
-  private width = 1300;
+  private width = 920;
   private height = (this.cellSize + this.cellPadding) * 8;
 
   // D3 variables
