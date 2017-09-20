@@ -22,6 +22,5 @@ export class DataService {
       .key(function(d: any) {return d.type})
       .rollup(function(g: any) {return g.length})
       .map(this.data)
-    console.log(this.byProvider)
   }
 }

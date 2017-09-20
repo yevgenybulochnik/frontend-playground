@@ -6,11 +6,11 @@ import { DataService } from '../services/data.service'
   template: `
   <div class='clinic-container'>
     <span>Clinics</span>
-    <button *ngFor='let clinic of clinics'>{{clinic}}</button>
+    <button *ngFor='let clinic of clinics' (click)='getData(clinic)' [class.selected]='checkSelection(clinic)'>{{clinic}}</button>
   </div>
   <div class='provider-container'>
     <span>Providers</span>
-    <button *ngFor='let provider of providers'>{{provider}}</button>
+    <button *ngFor='let provider of providers' (click)='getData(provider)' [class.selected]='checkSelection(provider)'>{{provider}}</button>
   </div>
   `,
   styles: [`
@@ -46,8 +46,15 @@ import { DataService } from '../services/data.service'
 export class SideMenuComponent {
   clinics: string[];
   providers: string[];
+  selectedValues: string[];
   constructor(private dataService: DataService) {
     this.clinics = this.dataService.byClinic.keys()
     this.providers = this.dataService.byProvider.keys()
+  }
+
+  checkSelection(key: string) {
+    if (this.selectedValues.indexOf(key) >= 0) {
+      return true
+    }
   }
 }
