@@ -47,6 +47,7 @@ export class SideMenuComponent {
   clinics: string[];
   providers: string[];
   constructor(private dataService: DataService) {
-    console.log(this.dataService)
+    this.clinics = this.dataService.byClinic.keys()
+    this.providers = this.dataService.byProvider.keys()
   }
 }
