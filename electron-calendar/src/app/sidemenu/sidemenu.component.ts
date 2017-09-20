@@ -6,7 +6,7 @@ import { DataService } from '../services/data.service'
   template: `
   <div class='clinic-container'>
     <span>Clinics</span>
-    <button *ngFor='let clinic of clinics' (click)='getProviders(clinic)' [class.selected]='clinic === selectedClinic'>{{clinic}}</button>
+    <button *ngFor='let clinic of clinics'>{{clinic}}</button>
   </div>
   <div class='provider-container'>
     <span>Providers</span>
