@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ToolTipComponent } from './tooltip/tooltip.component';
 import { SideMenuComponent } from './sidemenu/sidemenu.component';
+import { DataService } from './services/data.service';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { SideMenuComponent } from './sidemenu/sidemenu.component';
     SideMenuComponent
   ],
   providers: [
+    DataService
   ],
   bootstrap: [ AppComponent ]
 })

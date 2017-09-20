@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataService } from '../services/data.service'
 
 @Component({
   selector: 'side-menu',
@@ -10,4 +11,7 @@ import { Component } from '@angular/core';
     `],
 })
 export class SideMenuComponent {
+  constructor(private dataService: DataService) {
+    console.log(this.dataService)
+  }
 }
