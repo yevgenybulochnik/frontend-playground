@@ -11,7 +11,7 @@ export class DataService {
     this.byClinic = d3.nest()
       .key(function(d: any) {return helper.cRename(d.clinic)})
       .key(function(d: any) {return d.date})
-      .key(function(d: any) {return d.type})
+      .key(function(d: any) {return helper.tRename(d.type)})
       .rollup(function(g: any) {return g.length})
       .map(this.data)
 
@@ -19,7 +19,7 @@ export class DataService {
       .key(function(d: any) {return helper.pRename(d.prov)})
       .key(function(d: any) {return d.date})
       .key(function(d: any) {return helper.cRename(d.clinic)})
-      .key(function(d: any) {return d.type})
+      .key(function(d: any) {return helper.tRename(d.type)})
       .rollup(function(g: any) {return g.length})
       .map(this.data)
   }
