@@ -19,7 +19,6 @@ import { DataService } from '../services/data.service'
     }
     button {
       margin: 0.1em 0.5em;
-      border-radius: 5px;
       border: solid 1px #008CBA;
       background-color: white;
       outline: none;
