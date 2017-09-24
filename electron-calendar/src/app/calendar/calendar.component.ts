@@ -141,18 +141,20 @@ export class CalendarComponent {
     this.toolTip = d3.select(element.nativeElement).select('tooltip')
       .style('opacity', 0)
     let tip = this.toolTip
+    this.dayCells.on('mouseover.data', (d: any) => {
+      this.toolTipData = moment(d).format('LL')
+    })
     this.dayCells.on('mouseover.position', function(d: any) {
       let elem = d3.select(this)
       let matrix = elem['_groups'][0][0].getScreenCTM().translate(+elem['_groups'][0][0].getAttribute('x'), + elem['_groups'][0][0].getAttribute('y'))
+      let tipHeight = 5 + tip.node().getBoundingClientRect().height
+      let tipWidth = (tip.node().getBoundingClientRect().width / 2) - 6
       tip.transition()
         .duration(0)
         .style('opacity', 0.8)
-        .style('left', (window.pageXOffset + matrix.e - 72) + 'px')
-        .style('top', (window.pageYOffset + matrix.f - 48) + 'px')
+        .style('left', (window.pageXOffset + matrix.e - tipWidth) + 'px')
+        .style('top', (window.pageYOffset + matrix.f - tipHeight) + 'px')
     })
-      .on('mouseover.data', (d: any) => {
-        this.toolTipData = moment(d).format('LL')
-      })
     .on('mouseout', function(d: any) {
       tip.transition()
         .duration(0)

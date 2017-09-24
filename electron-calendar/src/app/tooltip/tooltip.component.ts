@@ -11,12 +11,12 @@ import { Component, Input } from '@angular/core';
     :host {
       position: absolute;
       pointer-events: none;
+      font-family: arial
     }
     .tooltip {
       width: 10em;
       height: 2.5em;
       background-color: black;
-      position: absolute;
       border-radius: 0.2em;
       color: white;
     }
