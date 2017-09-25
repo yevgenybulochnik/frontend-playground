@@ -7,6 +7,7 @@ export class DataService {
   data = require('../data/2017.csv')
   byClinic: any;
   byProvider: any;
+  generatedCalendars = new Map();
   constructor() {
     this.byClinic = d3.nest()
       .key(function(d: any) {return helper.cRename(d.clinic)})
@@ -22,5 +23,18 @@ export class DataService {
       .key(function(d: any) {return helper.tRename(d.type)})
       .rollup(function(g: any) {return g.length})
       .map(this.data)
+  }
+
+  generateCalendar(value: string) {
+    if (this.generatedCalendars.has(value)) {
+      this.generatedCalendars.delete(value)
+    } else {
+      if (this.byClinic.has(value)) {
+        this.generatedCalendars.set(value, this.byClinic.get(value))
+      }
+      if (this.byProvider.has(value)) {
+        this.generatedCalendars.set(value, this.byProvider.get(value))
+      }
+    }
   }
 }

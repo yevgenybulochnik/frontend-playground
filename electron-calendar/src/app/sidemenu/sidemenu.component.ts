@@ -45,15 +45,18 @@ import { DataService } from '../services/data.service'
 export class SideMenuComponent {
   clinics: string[];
   providers: string[];
-  selectedValues: string[] = [];
   constructor(private dataService: DataService) {
     this.clinics = this.dataService.byClinic.keys()
     this.providers = this.dataService.byProvider.keys()
   }
 
   checkSelection(key: string) {
-    if (this.selectedValues.indexOf(key) >= 0) {
+    if (this.dataService.generatedCalendars.has(key)) {
       return true
     }
+  }
+
+  getData(value: string) {
+    this.dataService.generateCalendar(value)
   }
 }
