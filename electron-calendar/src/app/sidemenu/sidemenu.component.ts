@@ -16,6 +16,7 @@ import { DataService } from '../services/data.service'
   styles: [`
     :host {
       font-family: arial;
+      max-width: 6em;
     }
     button {
       margin: 0.1em 0.5em;

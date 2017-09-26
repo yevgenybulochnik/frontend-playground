@@ -63,7 +63,8 @@ export class CalendarComponent {
 
   generateDateRange() {
     if (this.data) {
-      let dataYear = moment(this.data[0].date, this.dateForm).format('YYYY')
+      let dataDates = this.data.keys()
+      let dataYear = moment(dataDates[0], this.dateForm).format('YYYY')
       this.firstDate = moment('01/01/' + dataYear, this.dateForm)
       this.lastDate = moment('12/31/' + dataYear, this.dateForm).add(1, 'day')
       this.dateRange = d3.timeDay.range(this.firstDate, this.lastDate)

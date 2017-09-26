@@ -8,7 +8,8 @@ import { DataService } from './services/data.service'
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-  constructor(private dataservice: DataService) {
-    console.log(this.dataservice)
+  calendars: any;
+  constructor(private dataService: DataService) {
+    this.calendars = this.dataService.generatedCalendars
   }
 }
