@@ -60,6 +60,7 @@ export class CalendarComponent {
     this.generateToolTip()
     this.generateColorScale()
     this.generateDayFill()
+    this.handlerToolTipData()
   }
 
   generateDateRange() {
@@ -143,9 +144,6 @@ export class CalendarComponent {
     this.toolTip = d3.select(element.nativeElement).select('tooltip')
       .style('opacity', 0)
     let tip = this.toolTip
-    this.dayCells.on('mouseover.data', (d: any) => {
-      this.toolTipData = moment(d).format('LL')
-    })
     this.dayCells.on('mouseover.position', function(d: any) {
       let elem = d3.select(this)
       let matrix = elem['_groups'][0][0].getScreenCTM().translate(+elem['_groups'][0][0].getAttribute('x'), + elem['_groups'][0][0].getAttribute('y'))
@@ -186,6 +184,17 @@ export class CalendarComponent {
         sum = encounterCount.reduce(function(a: number, b: number) {return a + b}, 0)
       }
       return this.colorScale(sum)
+    })
+  }
+
+  handlerToolTipData() {
+    this.dayCells.on('mouseover.data', (d: any) => {
+      let cellDate = moment(d).format('L')
+      if (this.data.has(cellDate)) {
+        this.toolTipData = [cellDate, this.data.get(cellDate)]
+      } else {
+        this.toolTipData = [cellDate]
+      }
     })
   }
 }

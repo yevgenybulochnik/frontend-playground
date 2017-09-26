@@ -5,7 +5,10 @@
   <div class="pane2">
     <div class='content'>
       <div class='calendars'>
-        <d3-calendar *ngFor='let calendar of calendars.keys()' [data]='calendars.get(calendar)'></d3-calendar>
+        <div class="cal-conatiner" *ngFor='let calendar of calendars.keys()'>
+          <div class="label">{{calendar}}</div>
+          <d3-calendar [data]='calendars.get(calendar)'></d3-calendar>
+        </div>
       </div>
       <div class="graphs">
         test
