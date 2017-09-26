@@ -59,6 +59,7 @@ export class CalendarComponent {
     this.generateDayLabels()
     this.generateToolTip()
     this.generateColorScale()
+    this.generateDayFill()
   }
 
   generateDateRange() {
@@ -167,5 +168,24 @@ export class CalendarComponent {
     this.colorScale = d3.scaleLinear<string>()
       .domain([0, 24, 30, 45])
       .range(['white', 'yellow', 'green', 'red'])
+  }
+
+  generateDayFill() {
+    this.dayCells.style('fill', (d: any) => {
+      let cellDate = moment(d).format('L')
+      let sum = 0
+      if (this.data.has(cellDate)) {
+        let dayData = this.data.get(cellDate)
+        let encounterCount: number[] = []
+        dayData.each(function(v: any, k: any) {
+          let clinicData = dayData.get(k)
+          for (let value of clinicData.values()) {
+            encounterCount.push(value)
+          }
+        })
+        sum = encounterCount.reduce(function(a: number, b: number) {return a + b}, 0)
+      }
+      return this.colorScale(sum)
+    })
   }
 }
