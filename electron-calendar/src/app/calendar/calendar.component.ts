@@ -57,10 +57,10 @@ export class CalendarComponent {
     this.generateDays()
     this.generateMonthLabels()
     this.generateDayLabels()
+    this.handlerToolTipData()
     this.generateToolTip()
     this.generateColorScale()
     this.generateDayFill()
-    this.handlerToolTipData()
   }
 
   generateDateRange() {
