@@ -48,7 +48,7 @@ export class SideMenuComponent {
   providers: string[];
   constructor(private dataService: DataService) {
     this.clinics = this.dataService.byClinic.keys()
-    this.providers = this.dataService.byProvider.keys()
+    this.providers = this.dataService.byProvider.keys().sort()
   }
 
   checkSelection(key: string) {
