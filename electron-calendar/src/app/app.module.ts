@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ToolTipComponent } from './tooltip/tooltip.component';
 import { SideMenuComponent } from './sidemenu/sidemenu.component';
+import { TopMenuComponent } from './topmenu/topmenu.component';
 import { DataService } from './services/data.service';
 
 @NgModule({
@@ -18,7 +19,8 @@ import { DataService } from './services/data.service';
     AppComponent,
     CalendarComponent,
     ToolTipComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    TopMenuComponent
   ],
   providers: [
     DataService

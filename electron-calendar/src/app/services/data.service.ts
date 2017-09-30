@@ -4,7 +4,7 @@ import * as helper from '../data/dataHelper';
 
 @Injectable()
 export class DataService {
-  data = require('../data/2017.csv')
+  data = require('../data/temp.csv')
   byClinic: any;
   byProvider: any;
   generatedCalendars = new Map();
