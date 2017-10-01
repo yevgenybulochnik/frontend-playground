@@ -1,4 +1,4 @@
 # Electron Calendar 
 #### Dependencies 
-* D3
-* Moment.js
+* [D3](https://d3js.org/)
+* [Moment.js](https://momentjs.com/)
