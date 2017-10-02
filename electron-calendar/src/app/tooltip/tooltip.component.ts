@@ -80,6 +80,9 @@ export class ToolTipComponent {
       refObject['encounters'] = []
       encounters.each(function(count: any, encounter: any) {
         refObject['encounters'].push({type: encounter, value: count})
+        refObject['encounters'].sort(function(a: any, b: any) {
+          return b.value - a.value
+        })
         encounterCounts.push(count)
       })
       this.dayData.push(refObject)
