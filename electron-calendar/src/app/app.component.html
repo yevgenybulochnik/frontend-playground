@@ -6,7 +6,7 @@
       <div class='calendars'>
         <div class="cal-conatiner" *ngFor='let calendar of calendars.keys()'>
           <div class="label">{{calendar}}</div>
-          <d3-calendar [data]='calendars.get(calendar)'></d3-calendar>
+          <d3-calendar [data]='calendars.get(calendar)' [domain]='setDomain(calendar)'></d3-calendar>
         </div>
       </div>
       <div class="graphs">

@@ -16,6 +16,7 @@ export class CalendarComponent {
   // Refernce to .container div
   @ViewChild('container') element: any;
   @Input() data: any;
+  @Input() domain: number[];
 
   // Default values
   private cellSize = 11;
@@ -164,7 +165,7 @@ export class CalendarComponent {
 
   generateColorScale() {
     this.colorScale = d3.scaleLinear<string>()
-      .domain([0, 24, 30, 45])
+      .domain(this.domain)
       .range(['white', 'yellow', 'green', 'red'])
   }
 
