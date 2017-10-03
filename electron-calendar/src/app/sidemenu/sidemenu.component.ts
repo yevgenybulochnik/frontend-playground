@@ -47,12 +47,12 @@ export class SideMenuComponent {
   clinics: string[];
   providers: string[];
   constructor(private dataService: DataService) {
-    this.clinics = this.dataService.byClinic.keys()
-    this.providers = this.dataService.byProvider.keys().sort()
+    this.clinics = this.dataService.clinics
+    this.providers = this.dataService.providers
   }
 
   checkSelection(key: string) {
-    if (this.dataService.generatedCalendars.has(key)) {
+    if (this.dataService.generatedCalendars.has(key + this.dataService.selectedYear)) {
       return true
     }
   }
