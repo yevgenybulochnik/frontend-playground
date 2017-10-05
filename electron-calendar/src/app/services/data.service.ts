@@ -42,6 +42,8 @@ export class DataService {
     for (let provider of this.byProvider.get(year).keys()) {
       this.providers.push(provider)
     }
+    this.clinics.sort()
+    this.providers.sort()
   }
 
   generateCalendar(value: string) {
