@@ -39,7 +39,7 @@ import { DataService } from '../services/data.service'
 export class TopMenuComponent {
   years: any;
   constructor(private dataService: DataService) {
-    this.years = this.dataService.byClinic.keys()
+    this.years = this.dataService.byClinic.keys().sort()
   }
   getClinicProviders(value: any) {
     this.dataService.generateKeys(value)
