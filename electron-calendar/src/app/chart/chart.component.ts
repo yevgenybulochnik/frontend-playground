@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { DataService } from '../services/data.service';
 import * as d3 from 'd3';
 import * as moment from 'moment';
 
@@ -19,7 +20,7 @@ export class ChartComponent {
 
   // D3 variables
   private svg: any;
-  constructor() {
+  constructor(private dataService: DataService) {
 
   }
 
@@ -28,6 +29,10 @@ export class ChartComponent {
     this.svg = d3.select(element.nativeElement).append('svg')
       .attr('width', this.width)
       .attr('height', this.height)
+
+  // temporary data, will switch to @Input
+    let data = this.dataService.byProvider.get('2017').get('YBS')
+    console.log(data)
   }
 
 }
