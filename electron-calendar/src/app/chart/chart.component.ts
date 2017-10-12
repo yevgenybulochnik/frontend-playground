@@ -15,11 +15,20 @@ export class ChartComponent {
   @ViewChild('container') element: any;
 
   // Default values
-  private width: 1000;
-  private height: 500;
+  private width = 400;
+  private height = 300;
+  private plotMargins = {
+    top: 30,
+    bottom: 30,
+    left: 30,
+    right: 30
+  };
+  private plotWidth = this.width - this.plotMargins.left - this.plotMargins.right
+  private plotHeight = this.height - this.plotMargins.top - this.plotMargins.bottom
 
   // D3 variables
   private svg: any;
+  private plotArea: any;
   constructor(private dataService: DataService) {
 
   }
@@ -29,10 +38,17 @@ export class ChartComponent {
     this.svg = d3.select(element.nativeElement).append('svg')
       .attr('width', this.width)
       .attr('height', this.height)
+    this.generatePlotArea()
 
   // temporary data, will switch to @Input
     let data = this.dataService.byProvider.get('2017').get('YBS')
     console.log(data)
+  }
+
+  generatePlotArea() {
+    this.plotArea = this.svg.append('g')
+      .attr('class', 'plot')
+      .attr('transform', `translate(${this.plotMargins.left}, ${this.plotMargins.top})`)
   }
 
 }
