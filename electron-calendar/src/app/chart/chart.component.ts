@@ -29,6 +29,10 @@ export class ChartComponent {
   // D3 variables
   private svg: any;
   private plotArea: any;
+  private xScale: any;
+  private yScale: any;
+  private xAxis: any;
+  private yAxis: any;
   constructor(private dataService: DataService) {
 
   }
@@ -39,16 +43,44 @@ export class ChartComponent {
       .attr('width', this.width)
       .attr('height', this.height)
     this.generatePlotArea()
+    this.generateScales()
+    this.generateAxis()
 
   // temporary data, will switch to @Input
-    let data = this.dataService.byProvider.get('2017').get('YBS')
-    console.log(data)
+    //let data = this.dataService.byProvider.get('2017').get('YBS')
+    //console.log(data)
   }
 
   generatePlotArea() {
     this.plotArea = this.svg.append('g')
       .attr('class', 'plot')
       .attr('transform', `translate(${this.plotMargins.left}, ${this.plotMargins.top})`)
+  }
+
+  generateScales() {
+    this.xScale = d3.scaleLinear()
+      .domain([1, 53])
+      .range([0, this.plotWidth])
+    this.yScale = d3.scaleLinear()
+      .domain([0, 250])
+      .range([this.plotHeight, 0])
+  }
+
+  generateAxis() {
+    let x = d3.axisBottom(this.xScale)
+    x.tickValues([4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52])
+    let y = d3.axisLeft(this.yScale)
+
+    this.xAxis = this.plotArea.append('g')
+      .classed('x', true)
+      .classed('axis', true)
+      .attr('transform', `translate(${0}, ${this.plotHeight})`)
+      .call(x)
+
+    this.yAxis = this.plotArea.append('g')
+      .classed('y', true)
+      .classed('axis', true)
+      .call(y)
   }
 
 }
