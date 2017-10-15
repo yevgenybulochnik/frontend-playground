@@ -70,13 +70,11 @@ export class ChartComponent {
     let x = d3.axisBottom(this.xScale)
     x.tickValues([4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52])
     let y = d3.axisLeft(this.yScale)
-
     this.xAxis = this.plotArea.append('g')
       .classed('x', true)
       .classed('axis', true)
       .attr('transform', `translate(${0}, ${this.plotHeight})`)
       .call(x)
-
     this.yAxis = this.plotArea.append('g')
       .classed('y', true)
       .classed('axis', true)
