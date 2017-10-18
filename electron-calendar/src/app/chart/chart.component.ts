@@ -1,5 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { DataService } from '../services/data.service';
+import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 import * as d3 from 'd3';
 import * as moment from 'moment';
 
@@ -13,6 +12,7 @@ import * as moment from 'moment';
 })
 export class ChartComponent {
   @ViewChild('container') element: any;
+  @Input() chartData: any;
 
   // Default values
   private width = 400;
@@ -33,7 +33,7 @@ export class ChartComponent {
   private yScale: any;
   private xAxis: any;
   private yAxis: any;
-  constructor(private dataService: DataService) {
+  constructor() {
 
   }
 
@@ -45,10 +45,10 @@ export class ChartComponent {
     this.generatePlotArea()
     this.generateScales()
     this.generateAxis()
+  }
 
-  // temporary data, will switch to @Input
-    //let data = this.dataService.byProvider.get('2017').get('YBS')
-    //console.log(data)
+  ngOnChanges() {
+
   }
 
   generatePlotArea() {
