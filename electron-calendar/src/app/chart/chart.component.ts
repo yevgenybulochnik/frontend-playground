@@ -13,6 +13,7 @@ import * as moment from 'moment';
 export class ChartComponent {
   @ViewChild('container') element: any;
   @Input() chartData: any;
+  @Input() chartDataSize: any;
 
   // Default values
   private width = 400;
@@ -48,7 +49,6 @@ export class ChartComponent {
   }
 
   ngOnChanges() {
-
   }
 
   generatePlotArea() {
@@ -80,5 +80,4 @@ export class ChartComponent {
       .classed('axis', true)
       .call(y)
   }
-
 }

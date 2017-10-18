@@ -10,8 +10,10 @@ import * as helper from './data/dataHelper';
 })
 export class AppComponent {
   calendars: any;
+  charts: any;
   constructor(private dataService: DataService) {
     this.calendars = this.dataService.generatedCalendars
+    this.charts = this.dataService.generatedCharts
   }
   setDomain(key: any) {
     return helper.generateDomain(key)
