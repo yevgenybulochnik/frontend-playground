@@ -49,6 +49,7 @@ export class ChartComponent {
   }
 
   ngOnChanges() {
+    this.addData()
   }
 
   generatePlotArea() {
@@ -62,7 +63,7 @@ export class ChartComponent {
       .domain([1, 53])
       .range([0, this.plotWidth])
     this.yScale = d3.scaleLinear()
-      .domain([0, 250])
+      .domain([0, 600])
       .range([this.plotHeight, 0])
   }
 
@@ -79,5 +80,57 @@ export class ChartComponent {
       .classed('y', true)
       .classed('axis', true)
       .call(y)
+  }
+
+  addData() {
+    let adjData: any = [];
+    if (this.chartData.size) {
+      console.log(this.chartData)
+      let cal = this.chartData.forEach(function(weekMap: any, calendarName: any) {
+        let refObj = new Object()
+        console.log(weekMap)
+        refObj['calendarName'] = calendarName
+        refObj['weeks'] = [];
+        weekMap.each(function(count: any, weekNumber: any) {
+          refObj['weeks'].push({week: Number(weekNumber), sum: count})
+        })
+        refObj['weeks'].sort(function(a: any, b: any) {
+          return a.week - b.week
+        })
+        adjData.push(refObj)
+      })
+
+      this.plotArea.selectAll('.calWeekSum').remove().exit()
+
+      let calData = this.plotArea.selectAll('.calWeekSum')
+        .data(adjData)
+        .enter().append('g')
+          .attr('class', 'calWeekSum')
+          .attr('ID', function(d: any) {return d.calendarName})
+
+      let weekData = calData.selectAll('circle')
+        .data(function(d: any) {return d.weeks})
+        .enter().append('circle')
+          .attr('r', 2)
+          .style('fill', 'red')
+          .attr('transform', (d: any, i: any) => `translate(${this.xScale(d.week)}, ${this.yScale(d.sum)})`)
+      let valueLine = d3.line()
+        .x((d: any) => {return this.xScale(d.week)})
+        .y((d: any) => {return this.yScale(d.sum)})
+        .curve(d3.curveCatmullRom)
+
+      this.plotArea.selectAll('.line').remove().exit()
+      for (let calendar of adjData) {
+        this.plotArea.append('path')
+          .data([calendar.weeks])
+          .attr('class', 'line')
+          .attr('d', valueLine)
+          .style('fill', 'none')
+          .style('stroke', '#000')
+        if (adjData.length === 0) {
+          this.plotArea.selectAll('.line').remove().exit()
+        }
+      }
+    }
   }
 }
