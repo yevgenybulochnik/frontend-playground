@@ -99,15 +99,12 @@ export class ChartComponent {
         })
         adjData.push(refObj)
       })
-
       this.plotArea.selectAll('.calWeekSum').remove().exit()
-
       let calData = this.plotArea.selectAll('.calWeekSum')
         .data(adjData)
         .enter().append('g')
           .attr('class', 'calWeekSum')
           .attr('ID', function(d: any) {return d.calendarName})
-
       let weekData = calData.selectAll('circle')
         .data(function(d: any) {return d.weeks})
         .enter().append('circle')
@@ -118,9 +115,8 @@ export class ChartComponent {
         .x((d: any) => {return this.xScale(d.week)})
         .y((d: any) => {return this.yScale(d.sum)})
         .curve(d3.curveCatmullRom)
-
-      this.plotArea.selectAll('.line').remove().exit()
       let color = d3.scaleOrdinal(d3.schemeCategory10)
+      this.plotArea.selectAll('.line').remove().exit()
       for (let calendar of adjData) {
         this.plotArea.append('path')
           .data([calendar.weeks])
