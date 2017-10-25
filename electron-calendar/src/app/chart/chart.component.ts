@@ -120,13 +120,15 @@ export class ChartComponent {
         .curve(d3.curveCatmullRom)
 
       this.plotArea.selectAll('.line').remove().exit()
+      let color = d3.scaleOrdinal(d3.schemeCategory10)
       for (let calendar of adjData) {
         this.plotArea.append('path')
           .data([calendar.weeks])
           .attr('class', 'line')
           .attr('d', valueLine)
+          .attr('stroke-width', 2)
           .style('fill', 'none')
-          .style('stroke', '#000')
+          .style('stroke', color)
         if (adjData.length === 0) {
           this.plotArea.selectAll('.line').remove().exit()
         }
