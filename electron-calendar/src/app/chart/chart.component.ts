@@ -26,6 +26,8 @@ export class ChartComponent {
   };
   private plotWidth = this.width - this.plotMargins.left - this.plotMargins.right
   private plotHeight = this.height - this.plotMargins.top - this.plotMargins.bottom
+  private adjData: any = [];
+  private componentInitialized = false;
 
   // D3 variables
   private svg: any;
@@ -34,6 +36,9 @@ export class ChartComponent {
   private yScale: any;
   private xAxis: any;
   private yAxis: any;
+  private calWeeks: any;
+  private calPoints: any;
+  private calLines: any;
   constructor() {
 
   }
@@ -46,6 +51,10 @@ export class ChartComponent {
     this.generatePlotArea()
     this.generateScales()
     this.generateAxis()
+    this.componentInitialized = true
+    this.generateCalWeeks()
+    this.generateCalPoints()
+    this.generateCalLines()
   }
 
   ngOnChanges() {
@@ -82,53 +91,64 @@ export class ChartComponent {
       .call(y)
   }
 
-  addData() {
-    let adjData: any = [];
-    if (this.chartData.size) {
-      console.log(this.chartData)
-      let cal = this.chartData.forEach(function(weekMap: any, calendarName: any) {
-        let refObj = new Object()
-        console.log(weekMap)
-        refObj['calendarName'] = calendarName
-        refObj['weeks'] = [];
-        weekMap.each(function(count: any, weekNumber: any) {
-          refObj['weeks'].push({week: Number(weekNumber), sum: count})
-        })
-        refObj['weeks'].sort(function(a: any, b: any) {
-          return a.week - b.week
-        })
-        adjData.push(refObj)
+  generateCalWeeks() {
+    this.calWeeks = this.plotArea.selectAll('.caldata')
+      .data(this.adjData)
+      .enter().append('g')
+        .attr('class', 'caldata')
+  }
+
+  generateCalPoints() {
+    this.calPoints = this.calWeeks.selectAll('circle')
+      .data(function(d: any) {return d.weeks})
+      .enter().append('circle')
+        .attr('class', '.points')
+        .attr('r', 2)
+        .style('fill', 'red')
+        .attr('transform', (d: any, i: any) => `translate(${this.xScale(d.week)}, ${this.yScale(d.sum)})`)
+  }
+
+  generateCalLines() {
+    let valueLine = d3.line()
+      .x((d: any) => {return this.xScale(d.week)})
+      .y((d: any) => {return this.yScale(d.sum)})
+      .curve(d3.curveCatmullRom)
+    let color = d3.scaleOrdinal(d3.schemeCategory10)
+    this.calLines = this.calWeeks.selectAll('path')
+      .data(function(d: any) {return [d.weeks]})
+      .enter().append('path')
+        .attr('class', 'line')
+        .attr('d', valueLine)
+        .attr('stroke-width', 2)
+        .style('fill', 'none')
+        .style('stroke', color)
+  }
+
+  generateDataObject() {
+    this.chartData.forEach((weekMap: any, calendarName: any) => {
+      let refObj = new Object()
+      refObj['calendarName'] = calendarName
+      refObj['weeks'] = [];
+      weekMap.each(function(count: any, weekNumber: any) {
+        refObj['weeks'].push({week: Number(weekNumber), sum: count})
       })
-      this.plotArea.selectAll('.calWeekSum').remove().exit()
-      let calData = this.plotArea.selectAll('.calWeekSum')
-        .data(adjData)
-        .enter().append('g')
-          .attr('class', 'calWeekSum')
-          .attr('ID', function(d: any) {return d.calendarName})
-      let weekData = calData.selectAll('circle')
-        .data(function(d: any) {return d.weeks})
-        .enter().append('circle')
-          .attr('r', 2)
-          .style('fill', 'red')
-          .attr('transform', (d: any, i: any) => `translate(${this.xScale(d.week)}, ${this.yScale(d.sum)})`)
-      let valueLine = d3.line()
-        .x((d: any) => {return this.xScale(d.week)})
-        .y((d: any) => {return this.yScale(d.sum)})
-        .curve(d3.curveCatmullRom)
-      let color = d3.scaleOrdinal(d3.schemeCategory10)
-      this.plotArea.selectAll('.line').remove().exit()
-      for (let calendar of adjData) {
-        this.plotArea.append('path')
-          .data([calendar.weeks])
-          .attr('class', 'line')
-          .attr('d', valueLine)
-          .attr('stroke-width', 2)
-          .style('fill', 'none')
-          .style('stroke', color)
-        if (adjData.length === 0) {
-          this.plotArea.selectAll('.line').remove().exit()
-        }
-      }
+      refObj['weeks'].sort(function(a: any, b: any) {
+        return a.week - b.week
+      })
+      this.adjData.push(refObj)
+    })
+  }
+
+  addData() {
+    this.adjData.length = 0
+    if (this.componentInitialized) {
+      this.calWeeks.remove()
+    }
+    if (this.chartData.size) {
+      this.generateDataObject()
+      this.generateCalWeeks()
+      this.generateCalPoints()
+      this.generateCalLines()
     }
   }
 }
