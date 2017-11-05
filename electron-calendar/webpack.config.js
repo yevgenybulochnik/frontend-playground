@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -55,7 +56,11 @@ module.exports = {
     new webpack.ContextReplacementPlugin( //necessary to resolve core.es5.js warnings
       /angular(\\|\/)core(\\|\/)@angular/,
       path.resolve(__dirname, '../src')
-    )
+    ),
+      new CopyWebpackPlugin([
+        {from: 'src/electron-main.js'},
+        {from: 'src/package.json'}
+      ])
   ],
   devServer:{
     port: 3000,

@@ -4,7 +4,7 @@
   "description": "Data Analysis Calendar Heatmap",
   "main": "main.ts",
   "scripts": {
-    "start": "electron electron-main.js",
+    "buildLin": "./node_modules/.bin/webpack && ./node_modules/.bin/electron-packager ./build CalApp ",
     "sp": "node --max_old_space_size=4096 ./node_modules/.bin/webpack-dev-server --public preview.bulochnik.com",
     "sl": "node --max_old_space_size=4096 ./node_modules/.bin/webpack-dev-server --host 192.168.2.21"
   },
@@ -16,8 +16,10 @@
     "@types/node": "^8.0.28",
     "angular2-template-loader": "^0.6.2",
     "awesome-typescript-loader": "^3.2.3",
+    "copy-webpack-plugin": "^4.2.0",
     "dsv-loader": "^2.0.0",
     "electron": "^1.7.9",
+    "electron-packager": "^9.1.0",
     "file-loader": "^0.11.2",
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
