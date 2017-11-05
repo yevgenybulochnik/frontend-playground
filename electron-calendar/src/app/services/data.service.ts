@@ -20,14 +20,14 @@ export class DataService {
       .key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('YYYY')})
       .key(function(d: any) {return helper.cRename(d.clinic)})
       .key(function(d: any) {return d.date})
-      .key(function(d: any) {return helper.pRename(d.prov)})
+      .key((d: any) => {return this.renameProvider(d.prov)})
       .key(function(d: any) {return helper.tRename(d.type)})
       .rollup(function(g: any) {return g.length})
       .map(this.data)
 
     this.byProvider = d3.nest()
       .key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('YYYY')})
-      .key(function(d: any) {return helper.pRename(d.prov)})
+      .key((d: any) => {return this.renameProvider(d.prov)})
       .key(function(d: any) {return d.date})
       .key(function(d: any) {return helper.cRename(d.clinic)})
       .key(function(d: any) {return helper.tRename(d.type)})
@@ -43,10 +43,32 @@ export class DataService {
 
     this.byProviderWeek = d3.nest()
       .key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('YYYY')})
-      .key(function(d: any) {return helper.pRename(d.prov)})
+      .key((d: any) => {return this.renameProvider(d.prov)})
       .key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('w')})
       .rollup(function(g: any) {return g.length})
       .map(this.data)
+  }
+
+  renameProvider(onName: string) {
+    let isName = /([a-zA-Z'-]+),\s([a-zA-z'-]+)\s?([a-zA-Z'-]+)?$/
+    let match = isName.exec(onName)
+    if (match) {
+      let fullName = match[0]
+      let lastName = match[1]
+      let firstName = match[2]
+      let middleName = match[3]
+      let initials = ''
+      if (middleName) {
+        initials = firstName[0] + middleName[0] + lastName[0]
+        return initials.toUpperCase()
+      } else {
+        initials = firstName[0] + lastName[0]
+        return initials.toUpperCase()
+      }
+    } else {
+      console.log(onName)
+      return 'ERR'
+    }
   }
 
   generateKeys(year: string) {
