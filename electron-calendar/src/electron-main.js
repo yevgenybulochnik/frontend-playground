@@ -13,7 +13,7 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1440, height: 800, frame: false})
+  mainWindow = new BrowserWindow({width: 1440, height: 800, frame: false, resizable: false})
   //mainWindow.setMenu(null)
 
   // and load the index.html of the app.
@@ -24,7 +24,7 @@ function createWindow () {
   }))
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

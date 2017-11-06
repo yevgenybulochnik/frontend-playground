@@ -25,6 +25,7 @@ import { DataService } from '../services/data.service'
       background-color: white;
       outline: none;
       border-radius: 3px;
+      -webkit-app-region: no-drag;
     }
     button:hover {
       background-color: #008CBA;
