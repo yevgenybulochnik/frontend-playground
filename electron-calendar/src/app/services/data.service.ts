@@ -5,7 +5,7 @@ import * as helper from '../data/dataHelper';
 
 @Injectable()
 export class DataService {
-  data = require('../data/all1417.csv')
+  data = require('../data/omw17.csv')
   byClinic: any;
   byProvider: any;
   byClinicWeek: any;

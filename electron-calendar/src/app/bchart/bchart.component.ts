@@ -1,12 +1,13 @@
 import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 
 @Component({
-  selector: 'bar-chart',
+  selector: 'd3-bar-chart',
   template: `
   <div #container class="container">
+  test
   </div>
   `,
-  styleUrls: ['./chart.bchartcomponent.sass']
+  styleUrls: ['./bchart.component.sass']
 })
 
 export class BChartComponent {
