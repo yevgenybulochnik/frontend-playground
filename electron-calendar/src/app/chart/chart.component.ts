@@ -32,6 +32,7 @@ export class ChartComponent {
   // D3 variables
   private svg: any;
   private plotArea: any;
+  private toolTip: any;
   private xScale: any;
   private yScale: any;
   private xAxis: any;
@@ -49,6 +50,7 @@ export class ChartComponent {
       .attr('width', this.width)
       .attr('height', this.height)
     this.generatePlotArea()
+    this.generateToolTip()
     this.generateScales()
     this.generateAxis()
     this.componentInitialized = true
@@ -65,6 +67,12 @@ export class ChartComponent {
     this.plotArea = this.svg.append('g')
       .attr('class', 'plot')
       .attr('transform', `translate(${this.plotMargins.left}, ${this.plotMargins.top})`)
+  }
+
+  generateToolTip() {
+   this.toolTip = d3.select(this.element.nativeElement).append('div')
+      .attr('class', 'tooltip')
+      .style('opacity', 0)
   }
 
   generateScales() {
@@ -102,10 +110,23 @@ export class ChartComponent {
     this.calPoints = this.calMonths.selectAll('circle')
       .data(function(d: any) {return d.months})
       .enter().append('circle')
-        .attr('class', '.points')
-        .attr('r', 2)
+        .attr('class', 'points')
+        .attr('r', 3)
         .style('fill', 'red')
         .attr('transform', (d: any, i: any) => `translate(${this.xScale(moment(d.month).format('MMM'))}, ${this.yScale(d.sum)})`)
+      .on('mouseover', (d: any) => {
+        this.toolTip.transition()
+          .duration(0)
+          .style('opacity', 0.8)
+        this.toolTip.html(d.sum)
+          .style('left', (d3.event.pageX - 17) + 'px')
+          .style('top', (d3.event.pageY - 40) + 'px')
+      })
+      //.on('mouseout', (d: any) => {
+        //this.toolTip.transition()
+          //.duration(0)
+          //.style('opacity', 0)
+      //})
   }
 
   generateCalLines() {
@@ -147,8 +168,8 @@ export class ChartComponent {
     if (this.chartData.size) {
       this.generateDataObject()
       this.generateCalMonths()
-      this.generateCalPoints()
       this.generateCalLines()
+      this.generateCalPoints()
     }
   }
 }
