@@ -37,16 +37,18 @@ export class DataService {
     this.byClinicWeek = d3.nest()
       .key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('YYYY')})
       .key(function(d: any) {return helper.cRename(d.clinic)})
-      .key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('w')})
+      .key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('M')})
       .rollup(function(g: any) {return g.length})
       .map(this.data)
 
     this.byProviderWeek = d3.nest()
       .key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('YYYY')})
       .key((d: any) => {return this.renameProvider(d.prov)})
-      .key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('w')})
+      .key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('M')})
       .rollup(function(g: any) {return g.length})
       .map(this.data)
+
+    console.log(this.byProviderWeek)
   }
 
   renameProvider(onName: string) {

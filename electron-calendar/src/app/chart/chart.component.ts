@@ -36,7 +36,7 @@ export class ChartComponent {
   private yScale: any;
   private xAxis: any;
   private yAxis: any;
-  private calWeeks: any;
+  private calMonths: any;
   private calPoints: any;
   private calLines: any;
   constructor() {
@@ -52,7 +52,7 @@ export class ChartComponent {
     this.generateScales()
     this.generateAxis()
     this.componentInitialized = true
-    this.generateCalWeeks()
+    this.generateCalMonths()
     this.generateCalPoints()
     this.generateCalLines()
   }
@@ -68,9 +68,10 @@ export class ChartComponent {
   }
 
   generateScales() {
-    this.xScale = d3.scaleLinear()
-      .domain([1, 53])
+    this.xScale = d3.scalePoint()
+      .domain(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
       .range([0, this.plotWidth])
+      .padding(0.5)
     this.yScale = d3.scaleLinear()
       .domain([0, 600])
       .range([this.plotHeight, 0])
@@ -78,7 +79,6 @@ export class ChartComponent {
 
   generateAxis() {
     let x = d3.axisBottom(this.xScale)
-    x.tickValues([4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52])
     let y = d3.axisLeft(this.yScale)
     this.xAxis = this.plotArea.append('g')
       .classed('x', true)
@@ -91,31 +91,31 @@ export class ChartComponent {
       .call(y)
   }
 
-  generateCalWeeks() {
-    this.calWeeks = this.plotArea.selectAll('.caldata')
+  generateCalMonths() {
+    this.calMonths = this.plotArea.selectAll('.caldata')
       .data(this.adjData)
       .enter().append('g')
         .attr('class', 'caldata')
   }
 
   generateCalPoints() {
-    this.calPoints = this.calWeeks.selectAll('circle')
-      .data(function(d: any) {return d.weeks})
+    this.calPoints = this.calMonths.selectAll('circle')
+      .data(function(d: any) {return d.months})
       .enter().append('circle')
         .attr('class', '.points')
         .attr('r', 2)
         .style('fill', 'red')
-        .attr('transform', (d: any, i: any) => `translate(${this.xScale(d.week)}, ${this.yScale(d.sum)})`)
+        .attr('transform', (d: any, i: any) => `translate(${this.xScale(moment(d.month).format('MMM'))}, ${this.yScale(d.sum)})`)
   }
 
   generateCalLines() {
     let valueLine = d3.line()
-      .x((d: any) => {return this.xScale(d.week)})
+      .x((d: any) => {return this.xScale(moment(d.month).format('MMM'))})
       .y((d: any) => {return this.yScale(d.sum)})
       .curve(d3.curveCatmullRom)
     let color = d3.scaleOrdinal(d3.schemeCategory10)
-    this.calLines = this.calWeeks.selectAll('path')
-      .data(function(d: any) {return [d.weeks]})
+    this.calLines = this.calMonths.selectAll('path')
+      .data(function(d: any) {return [d.months]})
       .enter().append('path')
         .attr('class', 'line')
         .attr('d', valueLine)
@@ -125,15 +125,15 @@ export class ChartComponent {
   }
 
   generateDataObject() {
-    this.chartData.forEach((weekMap: any, calendarName: any) => {
+    this.chartData.forEach((monthMap: any, calendarName: any) => {
       let refObj = new Object()
       refObj['calendarName'] = calendarName
-      refObj['weeks'] = [];
-      weekMap.each(function(count: any, weekNumber: any) {
-        refObj['weeks'].push({week: Number(weekNumber), sum: count})
+      refObj['months'] = [];
+      monthMap.each(function(count: any, monthNumber: any) {
+        refObj['months'].push({month: monthNumber, sum: count})
       })
-      refObj['weeks'].sort(function(a: any, b: any) {
-        return a.week - b.week
+      refObj['months'].sort(function(a: any, b: any) {
+        return a.month - b.month
       })
       this.adjData.push(refObj)
     })
@@ -142,11 +142,11 @@ export class ChartComponent {
   addData() {
     this.adjData.length = 0
     if (this.componentInitialized) {
-      this.calWeeks.remove()
+      this.calMonths.remove()
     }
     if (this.chartData.size) {
       this.generateDataObject()
-      this.generateCalWeeks()
+      this.generateCalMonths()
       this.generateCalPoints()
       this.generateCalLines()
     }
