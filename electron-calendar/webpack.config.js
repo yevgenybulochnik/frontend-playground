@@ -1,7 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
+var UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -60,11 +61,12 @@ module.exports = {
       new CopyWebpackPlugin([
         {from: 'src/electron-main.js'},
         {from: 'src/package.json'}
-      ])
+      ]),
+      new UglifyJSPlugin()
   ],
   devServer:{
     port: 3000,
     compress: true,
-    stats: 'minimal'
+    //stats: 'minimal'
   }
 };
