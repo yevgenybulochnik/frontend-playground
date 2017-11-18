@@ -3,3 +3,4 @@ Productivity report using Angular 2, D3 and Moment.js. Packaged as an Electron a
 #### Dependencies 
 * [D3](https://d3js.org/)
 * [Moment.js](https://momentjs.com/)
+* [Electron](https://electronjs.org/)
