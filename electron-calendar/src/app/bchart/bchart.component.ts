@@ -12,6 +12,7 @@ import * as d3 from 'd3';
 
 export class BChartComponent {
   @ViewChild('container') element: any;
+  @Input() selectedMonth: any;
 
   // Default values
   private width = 400;
@@ -45,6 +46,10 @@ export class BChartComponent {
     this.generatePlotArea()
     this.generateScales()
     this.generateAxis()
+  }
+
+  ngOnChanges() {
+    console.log(this.selectedMonth)
   }
 
   generatePlotArea() {

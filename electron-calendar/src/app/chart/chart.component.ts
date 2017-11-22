@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import * as d3 from 'd3';
 import * as moment from 'moment';
 
@@ -14,6 +14,7 @@ export class ChartComponent {
   @ViewChild('container') element: any;
   @Input() chartData: any;
   @Input() chartDataSize: any;
+  @Output() monthData: EventEmitter<any> = new EventEmitter();
 
   // Default values
   private width = 400;
@@ -127,6 +128,9 @@ export class ChartComponent {
           //.duration(0)
           //.style('opacity', 0)
       //})
+      .on('click', (d: any) => {
+        this.monthData.emit(d)
+      })
   }
 
   generateCalLines() {
@@ -151,7 +155,7 @@ export class ChartComponent {
       refObj['calendarName'] = calendarName
       refObj['months'] = [];
       monthMap.each(function(count: any, monthNumber: any) {
-        refObj['months'].push({month: monthNumber, sum: count})
+        refObj['months'].push({ calendarName: calendarName, month: monthNumber, sum: count})
       })
       refObj['months'].sort(function(a: any, b: any) {
         return a.month - b.month
