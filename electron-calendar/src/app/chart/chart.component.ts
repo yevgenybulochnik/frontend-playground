@@ -112,7 +112,7 @@ export class ChartComponent {
       .data(function(d: any) {return d.months})
       .enter().append('circle')
         .attr('class', 'points')
-        .attr('r', 3)
+        .attr('r', 4)
         .style('fill', 'red')
         .attr('transform', (d: any, i: any) => `translate(${this.xScale(moment(d.month).format('MMM'))}, ${this.yScale(d.sum)})`)
       .on('mouseover', (d: any) => {

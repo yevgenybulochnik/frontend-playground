@@ -25,6 +25,7 @@ export class BChartComponent {
   };
   private plotWidth = this.width - this.plotMargins.left - this.plotMargins.right
   private plotHeight = this.height - this.plotMargins.top - this.plotMargins.bottom
+  private componentInitialized = false;
 
   // D3 variables
   private svg: any;
@@ -34,6 +35,7 @@ export class BChartComponent {
   private yScale: any;
   private xAxis: any;
   private yAxis: any;
+  private dayRects: any;
   constructor() {
 
   }
@@ -44,12 +46,36 @@ export class BChartComponent {
       .attr('width', this.width)
       .attr('height', this.height)
     this.generatePlotArea()
+    this.componentInitialized = true
     this.generateScales()
     this.generateAxis()
   }
 
   ngOnChanges() {
-    console.log(this.selectedMonth)
+    if (this.componentInitialized) {
+      if (this.dayRects) {
+        this.dayRects.remove()
+      }
+      this.generateDayRects()
+    }
+  }
+
+  generateDayRects() {
+    let series = d3.stack()
+      .keys([ 'RT', 'TEL', 'EV', 'NP', 'PST', 'PTE', 'DO', 'NP MS', 'MS Tel', 'NP HEP'])(this.selectedMonth)
+    let z = d3.scaleOrdinal(d3.schemeCategory10)
+    this.dayRects = this.plotArea.append('g')
+      .selectAll('g')
+      .data(series)
+      .enter().append('g')
+        .attr('fill', function(d: any) {return z(d.key)})
+      .selectAll('rect')
+      .data(function(d: any) {return d})
+      .enter().append('rect')
+        .attr('width', '10px')
+        .attr('x', (d: any) => this.xScale(d.data.day))
+        .attr('y', (d: any) => this.yScale(d[1]))
+        .attr('height', (d: any) => this.yScale(d[0]) - this.yScale(d[1]))
   }
 
   generatePlotArea() {
@@ -63,7 +89,7 @@ export class BChartComponent {
       .domain([1, 31])
       .range([0, this.plotWidth])
     this.yScale = d3.scaleLinear()
-      .domain([0, 55])
+      .domain([0, 42])
       .range([this.plotHeight, 0])
   }
 
