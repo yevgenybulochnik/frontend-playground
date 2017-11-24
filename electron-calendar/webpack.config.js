@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   entry: {
@@ -58,11 +59,15 @@ module.exports = {
       /angular(\\|\/)core(\\|\/)@angular/,
       path.resolve(__dirname, '../src')
     ),
-      new CopyWebpackPlugin([
-        {from: 'src/electron-main.js'},
-        {from: 'src/package.json'}
-      ]),
-      new UglifyJSPlugin()
+      //new CopyWebpackPlugin([
+        //{from: 'src/electron-main.js'},
+        //{from: 'src/package.json'}
+      //]),
+      new BundleAnalyzerPlugin({
+          analyzerHost: 'localhost',
+          analyzerPort: '4243'
+      })
+      //new UglifyJSPlugin()
   ],
   devServer:{
     port: 3000,
