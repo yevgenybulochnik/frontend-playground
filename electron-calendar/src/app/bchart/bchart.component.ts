@@ -85,16 +85,28 @@ export class BChartComponent {
   }
 
   generateScales() {
-    this.xScale = d3.scaleLinear()
-      .domain([1, 31])
+    let days = []
+    for (let i = 1; i <= 31; i++) {
+      days.push(i.toString())
+    }
+    this.xScale = d3.scaleBand()
+      .domain(days)
       .range([0, this.plotWidth])
+      .padding(0.1)
     this.yScale = d3.scaleLinear()
       .domain([0, 42])
       .range([this.plotHeight, 0])
   }
 
   generateAxis() {
+    let ticks = []
+    for (let i = 1; i <= 31; i++) {
+      if (i % 2) {
+        ticks.push(i.toString())
+      }
+    }
     let x = d3.axisBottom(this.xScale)
+      .tickValues(ticks)
     let y = d3.axisLeft(this.yScale)
     this.xAxis = this.plotArea.append('g')
       .classed('x', true)
