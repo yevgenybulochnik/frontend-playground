@@ -16,10 +16,10 @@ export class BChartComponent {
 
   // Default values
   private width = 400;
-  private height = 300;
+  private height = 350;
   private plotMargins = {
     top: 30,
-    bottom: 30,
+    bottom: 80,
     left: 30,
     right: 30
   };
@@ -36,6 +36,7 @@ export class BChartComponent {
   private xAxis: any;
   private yAxis: any;
   private dayRects: any;
+  private legend: any;
   constructor() {
 
   }
@@ -49,6 +50,7 @@ export class BChartComponent {
     this.componentInitialized = true
     this.generateScales()
     this.generateAxis()
+    this.generateLegend()
   }
 
   ngOnChanges() {
@@ -117,5 +119,34 @@ export class BChartComponent {
       .classed('y', true)
       .classed('axis', true)
       .call(y)
+  }
+
+  generateLegend() {
+    let encounters = ['RT', 'TEL', 'EV', 'NP', 'PST', 'PTE', 'DO', 'NP MS', 'MS Tel', 'NP HEP']
+    let z = d3.scaleOrdinal(d3.schemeCategory10)
+    this.legend = this.svg.append('g')
+      .attr('class', 'legend')
+      .attr('transform', 'translate(60, 300)')
+    this.legend.selectAll('g')
+      .data(encounters)
+      .enter().append('g')
+      .attr('transform', function(d: any, i: any) {
+        if ( i < 7 ) {
+          return `translate(${i * 40}, 0)`
+        } else {
+          return `translate(${(i - 6) * 60}, 12)`
+        }
+      })
+      .append('rect')
+        .attr('width', 10)
+        .attr('height', 10)
+        .attr('fill', function(d: any) { return z(d) })
+    this.legend.selectAll('g')
+      .append('text')
+        .text(function(d: any) { return d })
+        .attr('font-family', 'arial')
+        .attr('font-size', 11)
+        .attr('dominant-baseline', 'text-before-edge')
+        .attr('x', 13)
   }
 }
