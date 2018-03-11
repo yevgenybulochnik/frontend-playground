@@ -5,7 +5,7 @@ import * as helper from '../data/dataHelper';
 
 @Injectable()
 export class DataService {
-  data = require('../data/onb17.csv')
+  data = require('../data/temp2.csv')
   byClinic: any;
   byProvider: any;
   byClinicWeek: any;
@@ -13,8 +13,8 @@ export class DataService {
   selectedYear: any;
   clinics: string[] = [];
   providers: string[] = [];
-  generatedCalendars = new Map();
-  generatedCharts = new Map();
+  generatedCalendars: any[] = [];
+  generatedCharts: any[] = [];
   constructor() {
     this.byClinic = d3.nest()
       .key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('YYYY')})
@@ -86,18 +86,18 @@ export class DataService {
   }
 
   generateCalendar(value: string) {
-    if (this.generatedCalendars.has(value + this.selectedYear)) {
-      this.generatedCalendars.delete(value + this.selectedYear)
-      this.generatedCharts.delete(value + this.selectedYear)
-    } else {
-      if (this.byClinic.get(this.selectedYear).has(value)) {
-        this.generatedCalendars.set(value + this.selectedYear, this.byClinic.get(this.selectedYear).get(value))
-        this.generatedCharts.set(value + this.selectedYear, this.byClinicWeek.get(this.selectedYear).get(value))
-      }
-      if (this.byProvider.get(this.selectedYear).has(value)) {
-        this.generatedCalendars.set(value + this.selectedYear, this.byProvider.get(this.selectedYear).get(value))
-        this.generatedCharts.set(value + this.selectedYear, this.byProviderWeek.get(this.selectedYear).get(value))
-      }
-    }
+    //if (this.generatedCalendars.has(value + this.selectedYear)) {
+      //this.generatedCalendars.delete(value + this.selectedYear)
+      //this.generatedCharts.delete(value + this.selectedYear)
+    //} else {
+      //if (this.byClinic.get(this.selectedYear).has(value)) {
+        //this.generatedCalendars.set(value + this.selectedYear, this.byClinic.get(this.selectedYear).get(value))
+        //this.generatedCharts.set(value + this.selectedYear, this.byClinicWeek.get(this.selectedYear).get(value))
+      //}
+      //if (this.byProvider.get(this.selectedYear).has(value)) {
+        //this.generatedCalendars.set(value + this.selectedYear, this.byProvider.get(this.selectedYear).get(value))
+        //this.generatedCharts.set(value + this.selectedYear, this.byProviderWeek.get(this.selectedYear).get(value))
+      //}
+    //}
   }
 }
