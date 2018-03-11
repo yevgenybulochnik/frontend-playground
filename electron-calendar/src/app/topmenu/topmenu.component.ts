@@ -40,7 +40,7 @@ import { DataService } from '../services/data.service'
 export class TopMenuComponent {
   years: any;
   constructor(private dataService: DataService) {
-    this.years =  dataService.years
+    this.years = dataService.years
   }
   getClinicProviders(value: any) {
     this.dataService.generateKeys(value)
