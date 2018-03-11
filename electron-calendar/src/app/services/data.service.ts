@@ -10,7 +10,8 @@ export class DataService {
   byProvider: any;
   byClinicWeek: any;
   byProviderWeek: any;
-  selectedYear: any;
+  selectedYear: string;
+  years: string[] = [];
   clinics: string[] = [];
   providers: string[] = [];
   generatedCalendars: any[] = [];
@@ -47,6 +48,7 @@ export class DataService {
       //.key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('M')})
       //.rollup(function(g: any) {return g.length})
       //.map(this.data)
+    this.setYears()
   }
 
   renameProvider(onName: string) {
@@ -66,20 +68,32 @@ export class DataService {
         return initials.toUpperCase()
       }
     } else {
-      console.log(onName)
+      //console.log(onName)
       return 'ERR'
+    }
+  }
+
+  setYears() {
+    for (let year in this.byClinic) {
+      if (year) {
+        this.years.push(year)
+      }
     }
   }
 
   generateKeys(year: string) {
     this.selectedYear = year
     this.clinics.length = 0
-    for (let clinic of this.byClinic.get(year).keys()) {
-      this.clinics.push(clinic)
+    for (let clinic in this.byClinic[year]) {
+      if (clinic) {
+        this.clinics.push(clinic)
+      }
     }
     this.providers.length = 0
-    for (let provider of this.byProvider.get(year).keys()) {
-      this.providers.push(provider)
+    for (let provider in this.byProvider[year]) {
+      if (provider) {
+        this.providers.push(provider)
+      }
     }
     this.clinics.sort()
     this.providers.sort()

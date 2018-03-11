@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 //import { BChartComponent } from './bchart/bchart.component';
 //import { ToolTipComponent } from './tooltip/tooltip.component';
 //import { SideMenuComponent } from './sidemenu/sidemenu.component';
-//import { TopMenuComponent } from './topmenu/topmenu.component';
+import { TopMenuComponent } from './topmenu/topmenu.component';
 import { DataService } from './services/data.service';
 
 @NgModule({
@@ -24,7 +24,7 @@ import { DataService } from './services/data.service';
     //BChartComponent,
     //ToolTipComponent,
     //SideMenuComponent,
-    //TopMenuComponent
+    TopMenuComponent
   ],
   providers: [
     DataService
