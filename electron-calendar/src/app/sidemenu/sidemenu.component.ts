@@ -46,9 +46,9 @@ import { DataService } from '../services/data.service'
 export class SideMenuComponent {
   clinics: string[];
   providers: string[];
-  constructor() {
-    //this.clinics = this.dataService.clinics
-    //this.providers = this.dataService.providers
+  constructor(private dataService: DataService) {
+    this.clinics = dataService.clinics
+    this.providers = dataService.providers
   }
 
   checkSelection(key: string) {

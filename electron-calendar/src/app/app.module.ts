@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 //import { ChartComponent } from './chart/chart.component';
 //import { BChartComponent } from './bchart/bchart.component';
 //import { ToolTipComponent } from './tooltip/tooltip.component';
-//import { SideMenuComponent } from './sidemenu/sidemenu.component';
+import { SideMenuComponent } from './sidemenu/sidemenu.component';
 import { TopMenuComponent } from './topmenu/topmenu.component';
 import { DataService } from './services/data.service';
 
@@ -23,7 +23,7 @@ import { DataService } from './services/data.service';
     //ChartComponent,
     //BChartComponent,
     //ToolTipComponent,
-    //SideMenuComponent,
+    SideMenuComponent,
     TopMenuComponent
   ],
   providers: [
