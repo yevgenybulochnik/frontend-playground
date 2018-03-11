@@ -5,7 +5,7 @@ import * as helper from '../data/dataHelper';
 
 @Injectable()
 export class DataService {
-  data = require('../data/temp2.csv')
+  data = require('../data/onb17.csv')
   byClinic: any;
   byProvider: any;
   byClinicWeek: any;
@@ -23,7 +23,7 @@ export class DataService {
       .key((d: any) => {return this.renameProvider(d.prov)})
       .key(function(d: any) {return helper.tRename(d.type)})
       .rollup(function(g: any) {return g.length})
-      .map(this.data)
+      .object(this.data)
 
     this.byProvider = d3.nest()
       .key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('YYYY')})
@@ -32,23 +32,21 @@ export class DataService {
       .key(function(d: any) {return helper.cRename(d.clinic)})
       .key(function(d: any) {return helper.tRename(d.type)})
       .rollup(function(g: any) {return g.length})
-      .map(this.data)
+      .object(this.data)
 
-    this.byClinicWeek = d3.nest()
-      .key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('YYYY')})
-      .key(function(d: any) {return helper.cRename(d.clinic)})
-      .key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('M')})
-      .rollup(function(g: any) {return g.length})
-      .map(this.data)
+    //this.byClinicWeek = d3.nest()
+      //.key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('YYYY')})
+      //.key(function(d: any) {return helper.cRename(d.clinic)})
+      //.key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('M')})
+      //.rollup(function(g: any) {return g.length})
+      //.map(this.data)
 
-    this.byProviderWeek = d3.nest()
-      .key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('YYYY')})
-      .key((d: any) => {return this.renameProvider(d.prov)})
-      .key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('M')})
-      .rollup(function(g: any) {return g.length})
-      .map(this.data)
-
-    console.log(this.byProviderWeek)
+    //this.byProviderWeek = d3.nest()
+      //.key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('YYYY')})
+      //.key((d: any) => {return this.renameProvider(d.prov)})
+      //.key(function(d: any) {return moment(d.date, 'MM/DD/YYYY').format('M')})
+      //.rollup(function(g: any) {return g.length})
+      //.map(this.data)
   }
 
   renameProvider(onName: string) {

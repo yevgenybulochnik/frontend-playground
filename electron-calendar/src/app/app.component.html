@@ -1,17 +1,17 @@
-<side-menu></side-menu>
+<!--<side-menu></side-menu>-->
 <div class="pane1">
-  <top-menu></top-menu>
+  <!--<top-menu></top-menu>-->
   <div class="pane2">
-    <div class='calendars'>
-      <div class="cal-container" *ngFor='let calendar of calendars.keys()'>
-        <div class="label">{{calendar}}</div>
-        <d3-calendar [data]='calendars.get(calendar)' [domain]='setDomain(calendar)'></d3-calendar>
-      </div>
-    </div>
-    <div class='charts'>
-      <d3-line-chart class='chart' [chartData]='charts' [chartDataSize]='charts.size' (monthData)='getMonthData($event)'></d3-line-chart>
-      <d3-bar-chart class='chart' [selectedMonth]='selectedMonthData'></d3-bar-chart>
-    </div>
+    <!--<div class='calendars'>-->
+      <!--<div class="cal-container" *ngFor='let calendar of calendars.keys()'>-->
+        <!--<div class="label">{{calendar}}</div>-->
+        <!--<d3-calendar [data]='calendars.get(calendar)' [domain]='setDomain(calendar)'></d3-calendar>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class='charts'>-->
+      <!--<d3-line-chart class='chart' [chartData]='charts' [chartDataSize]='charts.size' (monthData)='getMonthData($event)'></d3-line-chart>-->
+      <!--<d3-bar-chart class='chart' [selectedMonth]='selectedMonthData'></d3-bar-chart>-->
+    <!--</div>-->
   </div>
 </div>
 
