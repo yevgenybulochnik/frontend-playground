@@ -58,6 +58,6 @@ export class SideMenuComponent {
   }
 
   getData(value: string) {
-    //this.dataService.generateCalendar(value)
+    this.dataService.generateCalendar(value)
   }
 }

@@ -100,6 +100,14 @@ export class DataService {
   }
 
   generateCalendar(value: string) {
+    let ref = new Object()
+    ref['name'] = value + this.selectedYear
+    if (this.byClinic[this.selectedYear][value]) {
+      ref['data'] = this.byClinic[this.selectedYear][value]
+    } else {
+      ref['data'] = this.byProvider[this.selectedYear][value]
+    }
+    console.log(ref)
     //if (this.generatedCalendars.has(value + this.selectedYear)) {
       //this.generatedCalendars.delete(value + this.selectedYear)
       //this.generatedCharts.delete(value + this.selectedYear)
