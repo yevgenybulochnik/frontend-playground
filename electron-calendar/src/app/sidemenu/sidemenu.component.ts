@@ -52,6 +52,14 @@ export class SideMenuComponent {
   }
 
   checkSelection(key: string) {
+    let checkValue = this.dataService.generatedCalendars.findIndex((element) => {
+     return element.name === key + this.dataService.selectedYear
+    })
+    if (checkValue !== -1) {
+      return true
+    } else {
+      return false
+    }
     //if (this.dataService.generatedCalendars.has(key + this.dataService.selectedYear)) {
       //return true
     //}

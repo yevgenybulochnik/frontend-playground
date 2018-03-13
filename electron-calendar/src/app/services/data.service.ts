@@ -107,7 +107,7 @@ export class DataService {
     } else {
       ref['data'] = this.byProvider[this.selectedYear][value]
     }
-    console.log(ref)
+    this.generatedCalendars.push(ref)
     //if (this.generatedCalendars.has(value + this.selectedYear)) {
       //this.generatedCalendars.delete(value + this.selectedYear)
       //this.generatedCharts.delete(value + this.selectedYear)
