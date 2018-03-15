@@ -100,26 +100,20 @@ export class DataService {
   }
 
   generateCalendar(value: string) {
-    let ref = new Object()
-    ref['name'] = value + this.selectedYear
-    if (this.byClinic[this.selectedYear][value]) {
-      ref['data'] = this.byClinic[this.selectedYear][value]
+    let checkValue = this.generatedCalendars.findIndex((element) => {
+     return element.name === value + this.selectedYear
+    })
+    if (checkValue !== -1) {
+      this.generatedCalendars.splice(checkValue, 1)
     } else {
-      ref['data'] = this.byProvider[this.selectedYear][value]
+      let ref = new Object()
+      ref['name'] = value + this.selectedYear
+      if (this.byClinic[this.selectedYear][value]) {
+        ref['data'] = this.byClinic[this.selectedYear][value]
+      } else {
+        ref['data'] = this.byProvider[this.selectedYear][value]
+      }
+      this.generatedCalendars.push(ref)
     }
-    this.generatedCalendars.push(ref)
-    //if (this.generatedCalendars.has(value + this.selectedYear)) {
-      //this.generatedCalendars.delete(value + this.selectedYear)
-      //this.generatedCharts.delete(value + this.selectedYear)
-    //} else {
-      //if (this.byClinic.get(this.selectedYear).has(value)) {
-        //this.generatedCalendars.set(value + this.selectedYear, this.byClinic.get(this.selectedYear).get(value))
-        //this.generatedCharts.set(value + this.selectedYear, this.byClinicWeek.get(this.selectedYear).get(value))
-      //}
-      //if (this.byProvider.get(this.selectedYear).has(value)) {
-        //this.generatedCalendars.set(value + this.selectedYear, this.byProvider.get(this.selectedYear).get(value))
-        //this.generatedCharts.set(value + this.selectedYear, this.byProviderWeek.get(this.selectedYear).get(value))
-      //}
-    //}
   }
 }
