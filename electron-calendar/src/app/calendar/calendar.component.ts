@@ -66,7 +66,7 @@ export class CalendarComponent {
 
   generateDateRange() {
     if (this.data) {
-      let dataDates = this.data.keys()
+      let dataDates = Object.keys(this.data)
       let dataYear = moment(dataDates[0], this.dateForm).format('YYYY')
       this.firstDate = moment('01/01/' + dataYear, this.dateForm)
       this.lastDate = moment('12/31/' + dataYear, this.dateForm).add(1, 'day')
