@@ -173,14 +173,13 @@ export class CalendarComponent {
     this.dayCells.style('fill', (d: any) => {
       let cellDate = moment(d).format('L')
       let sum = 0
-      if (this.data.has(cellDate)) {
-        let dayData = this.data.get(cellDate)
+      if (this.data[cellDate]) {
+        let dayData = this.data[cellDate]
         let encounterCount: number[] = []
-        dayData.each(function(v: any, k: any) {
-          let clinicData = dayData.get(k)
-          for (let value of clinicData.values()) {
-            encounterCount.push(value)
-          }
+        Object.keys(dayData).map((key) => {
+          Object.keys(dayData[key]).map((value) => {
+            encounterCount.push(dayData[key][value])
+          })
         })
         sum = encounterCount.reduce(function(a: number, b: number) {return a + b}, 0)
       }
@@ -191,8 +190,8 @@ export class CalendarComponent {
   handlerToolTipData() {
     this.dayCells.on('mouseover.data', (d: any) => {
       let cellDate = moment(d).format('L')
-      if (this.data.has(cellDate)) {
-        this.toolTipData = [cellDate, this.data.get(cellDate)]
+      if (this.data[cellDate]) {
+        this.toolTipData = [cellDate, this.data[cellDate]]
       } else {
         this.toolTipData = [cellDate]
       }
