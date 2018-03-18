@@ -74,19 +74,23 @@ export class ToolTipComponent {
 
   generateDataObject(data: any) {
     let encounterCounts: number[] = []
-    data.each((encounters: any, clinic: any) => {
-      let refObject = new Object()
-      refObject['name'] = clinic
-      refObject['encounters'] = []
-      encounters.each(function(count: any, encounter: any) {
-        refObject['encounters'].push({type: encounter, value: count})
-        refObject['encounters'].sort(function(a: any, b: any) {
-          return b.value - a.value
-        })
-        encounterCounts.push(count)
-      })
-      this.dayData.push(refObject)
-    })
+    for (let clinic in data) {
+      if (clinic) {
+        let refObject = new Object()
+        refObject['name'] = clinic
+        refObject['encounters'] = []
+        for (let encounter in data[clinic]) {
+          if (encounter) {
+            refObject['encounters'].push({type: encounter, value: data[clinic][encounter]})
+            refObject['encounters'].sort(function(a: any, b: any) {
+              return b.value - a.value
+            })
+            encounterCounts.push(data[clinic][encounter])
+          }
+        }
+        this.dayData.push(refObject)
+      }
+    }
     this.sum = encounterCounts.reduce(function(a: number, b: number) {return a + b}, 0)
   }
 }
