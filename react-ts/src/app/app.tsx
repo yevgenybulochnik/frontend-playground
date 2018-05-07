@@ -5,5 +5,3 @@ export class App extends React.Component {
     return <div>Hello world</div>
   }
 }
-
-console.log(process.env.PUBLIC_DOMAIN)
