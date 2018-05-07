@@ -1,7 +1,24 @@
 import * as React from 'react'
 
-export class App extends React.Component {
+import { Button } from './components/button'
+
+interface AppState {
+  names: string[]
+}
+
+export class App extends React.Component<any, AppState> {
+  constructor(props: any) {
+    super(props)
+    this.state = {
+      names: ['test', 'hello', 'third', 'app']
+    }
+  }
   render() {
-    return <div>Hello world</div>
+    const names = this.state.names.map((index: any, name: any) => <Button key={index} name={name}/>)
+    return (
+      <div>Hello world
+        {names}
+      </div>
+    )
   }
 }
