@@ -7,8 +7,8 @@ module.exports = merge(baseConfig, {
   mode: 'development',
   devtool: 'source-map',
   devServer: {
-    port: 9000,
-    public: process.env.WEB || '',
+    port: process.env.PORT || 8080,
+    public: process.env.PUBLIC_DOMAIN|| '',
   },
   module: {
     rules: [
