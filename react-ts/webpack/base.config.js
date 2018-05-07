@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const DotEnv = require('dotenv-webpack')
 require('dotenv').config()
 
 module.exports = {
@@ -15,6 +16,9 @@ module.exports = {
         loader: 'awesome-typescript-loader'
       },
     ]
-  }
+  },
+  plugins: [
+    new DotEnv(),
+  ]
 }
 
