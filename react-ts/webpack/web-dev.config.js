@@ -1,4 +1,6 @@
+const webpack = require('webpack')
 const merge = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const baseConfig = require('./base.config.js')
 
 module.exports = merge(baseConfig, {
@@ -16,5 +18,16 @@ module.exports = merge(baseConfig, {
         loader: 'source-map-loader'
       }
     ]
-  }
+  },
+  optimization: {
+    splitChunks:{
+      chunks: 'all'
+    }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      inject: 'body'
+    }),
+  ]
 })
