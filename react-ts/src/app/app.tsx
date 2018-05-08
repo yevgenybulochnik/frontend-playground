@@ -14,7 +14,7 @@ export class App extends React.Component<any, AppState> {
     }
   }
   render() {
-    const names = this.state.names.map((index: any, name: any) => <AppButton key={index} name={name}/>)
+    const names = this.state.names.map((name: any, index: any) => <AppButton key={index} name={name}/>)
     return (
       <div>Hello world
         {names}

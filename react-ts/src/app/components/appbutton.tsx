@@ -5,10 +5,24 @@ export interface ButtonProps {
   name: string
 }
 
-export class AppButton extends React.Component<ButtonProps, {}> {
+type ButtonState = {
+  active: boolean
+}
+
+let componentStyles = `
+  ${styles.back}
+  ${styles.test}
+`
+
+export class AppButton extends React.Component<ButtonProps, ButtonState> {
+  state: ButtonState =  {
+    active: true,
+  }
   render() {
     return (
-      <button className={`${styles.test} ${styles.back}`}>{this.props.name}</button>
+      <div>
+      <button className={componentStyles}>{this.props.name}</button>
+      </div>
     )
   }
 }
