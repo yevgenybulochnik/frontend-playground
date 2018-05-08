@@ -16,7 +16,7 @@ module.exports = {
         loader: 'awesome-typescript-loader'
       },
       {
-        test: /\.css$/,
+        test: /\.(sass|scss)$/,
         use: [
           {loader: 'style-loader'},
           {
@@ -25,7 +25,8 @@ module.exports = {
               modules: true,
               localIdentName: '[path][name]__[local]--[hash:base64:5]'
             }
-          }
+          },
+          {loader: 'sass-loader'}
         ]
       },
     ]

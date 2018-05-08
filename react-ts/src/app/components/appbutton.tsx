@@ -1,5 +1,5 @@
 import * as React from 'react'
-const styles = require('./appbutton.css')
+const styles = require('./appbutton.sass')
 
 export interface ButtonProps {
   name: string
