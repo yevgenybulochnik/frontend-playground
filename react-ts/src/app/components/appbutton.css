@@ -1,0 +1,8 @@
+:local(.test) {
+  width: 100px;
+  height: 100px;
+}
+
+:local(.back) {
+  background: red;
+}
