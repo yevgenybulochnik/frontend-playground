@@ -1,7 +1,8 @@
 import * as React from 'react'
+import * as CSSModules from 'react-css-modules'
 const styles = require('./appbutton.sass')
 
-export interface ButtonProps {
+interface ButtonProps {
   name: string
 }
 
@@ -9,20 +10,17 @@ type ButtonState = {
   active: boolean
 }
 
-let componentStyles = `
-  ${styles.back}
-  ${styles.test}
-`
-
-export class AppButton extends React.Component<ButtonProps, ButtonState> {
+class AppButton extends React.Component<ButtonProps, ButtonState> {
   state: ButtonState =  {
     active: true,
   }
   render() {
     return (
       <div>
-      <button className={componentStyles}>{this.props.name}</button>
+        <button styleName='test back'>{this.props.name}</button>
       </div>
     )
   }
 }
+
+export default CSSModules(AppButton, styles, {allowMultiple: true})

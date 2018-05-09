@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { AppButton } from './components/appbutton'
+import AppButton from './components/appbutton'
 
 interface AppState {
   names: string[]
