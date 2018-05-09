@@ -12,6 +12,7 @@ module.exports = merge(baseConfig, {
       errors: true,
     },
     port: process.env.PORT || 8080,
+    host: process.env.HOST || '',
     public: process.env.PUBLIC_DOMAIN|| '',
   },
   module: {
