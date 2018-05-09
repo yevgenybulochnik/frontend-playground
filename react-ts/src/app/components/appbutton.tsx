@@ -2,31 +2,32 @@ import * as React from 'react'
 import * as CSSModules from 'react-css-modules'
 const styles = require('./appbutton.sass')
 
-interface ButtonProps {
+interface CompProps {
   name: string
 }
 
-type ButtonState = {
-  toggle: boolean
+type CompState = {
+  buttonState: "inactive" | "active"
 }
 
-class AppButton extends React.Component<ButtonProps, ButtonState> {
-  state: ButtonState =  {
-    toggle: false,
+class AppButton extends React.Component<CompProps, CompState> {
+  state: CompState =  {
+    buttonState: "inactive",
   }
 
   handleToggle = () => {
-    this.setState({toggle: !this.state.toggle})
+    this.setState({buttonState: this.state.buttonState === "inactive"? "active": "inactive"})
+    console.log(this.state)
   }
 
   render() {
     const {handleToggle} = this
-    const {toggle} = this.state
+    const {buttonState} = this.state
     return (
       <div>
         <button
           onClick={handleToggle}
-          styleName={toggle? 'active': 'inactive'}>
+          styleName={buttonState}>
           {this.props.name}
       </button>
       </div>
