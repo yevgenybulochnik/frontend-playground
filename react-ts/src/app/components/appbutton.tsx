@@ -7,17 +7,28 @@ interface ButtonProps {
 }
 
 type ButtonState = {
-  active: boolean
+  toggle: boolean
 }
 
 class AppButton extends React.Component<ButtonProps, ButtonState> {
   state: ButtonState =  {
-    active: true,
+    toggle: false,
   }
+
+  handleToggle = () => {
+    this.setState({toggle: !this.state.toggle})
+  }
+
   render() {
+    const {handleToggle} = this
+    const {toggle} = this.state
     return (
       <div>
-        <button styleName='test back'>{this.props.name}</button>
+        <button
+          onClick={handleToggle}
+          styleName={toggle? 'active': 'inactive'}>
+          {this.props.name}
+      </button>
       </div>
     )
   }
