@@ -34,4 +34,6 @@ class AppButton extends React.Component<CompProps, CompState> {
   }
 }
 
+export const test_variable = "test"
+
 export default CSSModules(AppButton, styles, {allowMultiple: true})
