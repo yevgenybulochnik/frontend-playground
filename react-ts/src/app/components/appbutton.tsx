@@ -17,7 +17,6 @@ class AppButton extends React.Component<CompProps, CompState> {
 
   handleToggle = () => {
     this.setState({buttonState: this.state.buttonState === "inactive"? "active": "inactive"})
-    console.log(this.state)
   }
 
   render() {
