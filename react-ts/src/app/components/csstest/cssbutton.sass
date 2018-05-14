@@ -1,0 +1,14 @@
+@mixin cssbutton
+  font-family: arial
+  transition: all 0.5s
+
+.inactive 
+  @include cssbutton
+  width: 100px
+  height: 100px
+
+.active 
+  @include cssbutton
+  width: 70px
+  height: 70px
+  background: green

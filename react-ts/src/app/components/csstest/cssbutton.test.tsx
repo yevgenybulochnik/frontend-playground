@@ -5,7 +5,7 @@ import * as Enzyme from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
 
 import CSSButton from './cssbutton'
-const styles = require('./cssbutton.css')
+const styles = require('./cssbutton.sass')
 
 Enzyme.configure({adapter: new Adapter()})
 

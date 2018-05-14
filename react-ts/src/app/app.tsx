@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import AppButton from './components/appbutton'
+import CSSButton from './components/csstest/cssbutton'
 
 interface AppState {
   names: string[]
@@ -18,6 +19,9 @@ export class App extends React.Component<any, AppState> {
     return (
       <div style={{display: 'flex'}}>Hello world
         {names}
+        <div>
+          <CSSButton name='cssbutton'/>
+        </div>
       </div>
     )
   }

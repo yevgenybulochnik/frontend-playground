@@ -1,5 +1,5 @@
 import * as React from 'react'
-const styles = require('./cssbutton.css')
+const styles = require('./cssbutton.sass')
 
 interface CompProps {
   name: string
