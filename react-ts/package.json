@@ -4,7 +4,7 @@
   "description": "React typescript boilerplate",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require ts-node/register --require ./config/mochaSetup.ts src/**/*.test.tsx"
+    "test": "mocha --require ts-node/register --require ./config/mochaSetup.ts \"src/**/*.test.tsx\""
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
     "@types/css-modules-require-hook": "^4.0.1",
     "@types/enzyme": "^3.1.10",
     "@types/enzyme-adapter-react-16": "^1.0.2",
+    "@types/jsdom": "^11.0.4",
     "@types/mocha": "^5.2.0",
     "@types/node-sass": "^3.10.32",
     "@types/react": "^16.3.13",
@@ -31,6 +32,7 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "html-webpack-plugin": "^3.2.0",
+    "jsdom": "^11.10.0",
     "mocha": "^5.1.1",
     "node-sass": "^4.9.0",
     "react-css-modules": "^4.7.2",

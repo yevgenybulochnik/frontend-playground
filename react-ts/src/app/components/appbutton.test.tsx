@@ -3,8 +3,6 @@ import * as mocha from 'mocha'
 import * as chai from 'chai'
 import {expect} from 'chai'
 import * as Enzyme from 'enzyme'
-import * as Adapter from 'enzyme-adapter-react-16'
-Enzyme.configure({adapter: new Adapter()})
 
 import AppButton, {test_variable} from './appbutton'
 const styles = require('./appbutton.sass')

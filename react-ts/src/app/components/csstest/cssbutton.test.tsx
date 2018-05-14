@@ -2,12 +2,9 @@ import * as React from 'react'
 import * as mocha from 'mocha'
 import {expect} from 'chai'
 import * as Enzyme from 'enzyme'
-import * as Adapter from 'enzyme-adapter-react-16'
 
 import CSSButton from './cssbutton'
 const styles = require('./cssbutton.sass')
-
-Enzyme.configure({adapter: new Adapter()})
 
 describe('test css component', () => {
   it('should render the component', () => {

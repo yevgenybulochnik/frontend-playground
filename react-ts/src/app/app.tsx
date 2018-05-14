@@ -19,9 +19,7 @@ export class App extends React.Component<any, AppState> {
     return (
       <div style={{display: 'flex'}}>Hello world
         {names}
-        <div>
-          <CSSButton name='cssbutton'/>
-        </div>
+        <CSSButton name='cssbutton'/>
       </div>
     )
   }
