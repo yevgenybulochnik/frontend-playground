@@ -29,5 +29,11 @@ describe('Test variable test', () =>{
     expect(wrapper.find(`.${styles.inactive}`).exists()).to.be.true
   })
 
+  it('should switch class to active on click', ()=> {
+    const wrapper = Enzyme.shallow(<AppButton name='test' />)
+    wrapper.find('button').simulate('click')
+    expect(wrapper.find('button').hasClass(`${styles.active}`)).to.be.true
+  })
+
 })
 
