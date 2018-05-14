@@ -4,7 +4,7 @@
   "description": "React typescript boilerplate",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require ts-node/register --require ignore-styles src/**/*.test.tsx"
+    "test": "mocha --require ts-node/register --require ./mocha-setup.js src/**/*.test.tsx"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "awesome-typescript-loader": "^5.0.0",
     "chai": "^4.1.2",
     "css-loader": "^0.28.11",
+    "css-modules-require-hook": "^4.2.3",
     "dotenv": "^5.0.1",
     "dotenv-webpack": "^1.5.5",
     "enzyme": "^3.3.0",

@@ -1,21 +1,23 @@
 import * as React from 'react'
-import './cssbutton.css'
+const styles = require('./cssbutton.css')
 
 interface CompProps {
   name: string
 }
 
 type CompState = {
-  buttonState: "inactive" | "active"
+  buttonState: string 
 }
 
 export default class CSSButton extends React.Component<CompProps, CompState> {
   state: CompState =  {
-    buttonState: "inactive",
+    buttonState: styles.inactive,
   }
 
   handleToggle = () => {
-    this.setState({buttonState: this.state.buttonState === "inactive"? "active": "inactive"})
+    this.setState({
+      buttonState: this.state.buttonState === `${styles.inactive}` ? `${styles.active}`: `${styles.inactive}`
+    })
   }
 
   render() {
@@ -25,7 +27,7 @@ export default class CSSButton extends React.Component<CompProps, CompState> {
       <div>
         <button
           onClick={handleToggle}
-          className='inactive'>
+          className={buttonState}>
           {this.props.name}
         </button>
       </div>
