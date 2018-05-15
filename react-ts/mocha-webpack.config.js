@@ -1,8 +1,9 @@
-const webpack = require('webpack');
-const DotEnv = require('dotenv-webpack')
-require('dotenv').config()
+var nodeExternals = require('webpack-node-externals');
 
 module.exports = {
+  mode: 'development',
+  target: 'node', // webpack should compile node compatible code
+  externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json']
   },
@@ -28,8 +29,4 @@ module.exports = {
       },
     ]
   },
-  plugins: [
-    new DotEnv(),
-  ]
 }
-

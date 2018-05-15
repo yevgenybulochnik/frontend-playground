@@ -11,4 +11,9 @@ describe('Testing Root application', () => {
     const wrapper = Enzyme.mount(<App />)
     expect(wrapper.exists()).to.be.true
   })
+
+  it('should contain 6 button children', () => {
+    const wrapper = Enzyme.mount(<App />)
+    expect(wrapper.find('button')).to.have.length(6)
+  })
 })

@@ -6,7 +6,7 @@ interface CompProps {
 }
 
 type CompState = {
-  buttonState: string 
+  buttonState: string
 }
 
 export default class CSSButton extends React.Component<CompProps, CompState> {

@@ -4,7 +4,10 @@
   "description": "React typescript boilerplate",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require ts-node/register --require ./config/mochaSetup.ts \"src/**/*.test.tsx\""
+    "web-dev": "webpack-dev-server --config ./webpack/web-dev.config.js",
+    "mocha-test": "mocha --require ts-node/register --require ./config/mochaSetup.ts \"src/**/*.test.tsx\"",
+    "test": "mocha-webpack --require ts-node/register --require ./config/mocha-webpackSetup.ts --webpack-config ./webpack/mocha-webpack.config.js \"src/**/*.test.tsx\"",
+    "test:watch": "npm run test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -34,6 +37,7 @@
     "html-webpack-plugin": "^3.2.0",
     "jsdom": "^11.10.0",
     "mocha": "^5.1.1",
+    "mocha-webpack": "^2.0.0-beta.0",
     "node-sass": "^4.9.0",
     "react-css-modules": "^4.7.2",
     "sass-loader": "^7.0.1",
@@ -44,7 +48,8 @@
     "webpack": "^4.7.0",
     "webpack-cli": "^2.1.2",
     "webpack-dev-server": "^3.1.4",
-    "webpack-merge": "^4.1.2"
+    "webpack-merge": "^4.1.2",
+    "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
     "react": "^16.3.2",
