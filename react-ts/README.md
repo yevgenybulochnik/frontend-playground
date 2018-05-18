@@ -5,3 +5,6 @@ Boilerplate and testing repo for a react typescript setup. Ideally, I would like
 ### Guidance Documents
 
 - [Typescript-Webpack](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
+- [React Ducks design pattern](https://levelup.gitconnected.com/structure-your-react-redux-project-for-scalability-and-maintainability-618ad82e32b7)
+- [React App scaling](https://medium.com/@alexmngn/how-to-use-redux-on-highly-scalable-javascript-applications-4e4b8cb5ef38)
+- [React App scaling 2](https://jaysoo.ca/2016/02/28/organizing-redux-application/)
