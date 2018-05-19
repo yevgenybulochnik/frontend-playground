@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "web-dev": "webpack-dev-server --config ./webpack/web-dev.config.js",
-    "mocha-test": "mocha --require ts-node/register --require ./config/mochaSetup.ts \"src/**/*.test.tsx\"",
-    "test": "mocha-webpack --require ts-node/register --require ./config/mocha-webpackSetup.ts --webpack-config ./webpack/mocha-webpack.config.js \"src/**/*.test.tsx\"",
+    "mocha-test": "mocha --require ts-node/register --require ./config/mochaSetup.ts \"src/**/*.test.{ts,tsx}\"",
+    "test": "mocha-webpack --require ts-node/register --require ./config/mocha-webpackSetup.ts --webpack-config ./webpack/mocha-webpack.config.js \"src/**/*.test.{ts,tsx}\"",
     "test:watch": "npm run test -- --watch"
   },
   "repository": {
