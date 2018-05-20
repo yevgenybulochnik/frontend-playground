@@ -24,4 +24,15 @@ describe('Todo ADD_TODO action and creator', () => {
       expect(result, `todo=${todo}`).to.have.all.keys('type', 'text')
     })
   }
+
+  //Example test from redux site
+  it('should create an action to add a todo', () => {
+    const text = 'Finish docs'
+    const expectedAction = {
+      type: todoActions.ADD_TODO,
+      text
+    }
+
+    expect(todoActions.addTodo(text)).to.deep.equal(expectedAction)
+  })
 })
