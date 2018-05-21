@@ -8,14 +8,31 @@ export const VisibilityFilters = {
   SHOW_ACTIVE: 'SHOW_ACTIVE'
 }
 
-export function addTodo(text: string) {
+interface AddTodoAction {
+  type: 'ADD_TODO'
+  text: string
+}
+
+export function addTodo(text: string): AddTodoAction {
   return { type: ADD_TODO, text }
 }
 
-export function toggleTodo(index: number) {
+interface ToggleTodoAction {
+  type: 'TOGGLE_TODO'
+  index: number
+}
+
+export function toggleTodo(index: number): ToggleTodoAction {
   return {type: TOGGLE_TODO, index}
 }
 
-export function setVisibilityFilter(filter: string) {
+interface SetVisibilityFilterAction {
+  type: 'SET_VISIBILITY_FILTER'
+  filter: string
+}
+
+export function setVisibilityFilter(filter: string): SetVisibilityFilterAction {
   return {type: SET_VISIBILITY_FILTER, filter}
 }
+
+export type Action = AddTodoAction | ToggleTodoAction | SetVisibilityFilterAction
