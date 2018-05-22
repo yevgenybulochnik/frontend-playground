@@ -5,7 +5,7 @@ const baseConfig = require('./base.config.js')
 
 module.exports = merge(baseConfig, {
   entry: {
-    app: './src/main.tsx',
+    app: './src/app/main.tsx',
   },
   mode: 'development',
   devtool: 'source-map',
@@ -34,7 +34,7 @@ module.exports = merge(baseConfig, {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './src/app/index.html',
       inject: 'body'
     }),
   ]
