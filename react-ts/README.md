@@ -8,6 +8,10 @@ Boilerplate and testing repo for a react typescript setup. Ideally, I would like
 - Enzyme
 - Jsdom
 
+### Dev Libs
+- Webpack
+- Nodemon
+
 ### Guidance Documents
 
 - [Typescript-Webpack](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
