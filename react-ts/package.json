@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "web-dev": "webpack-dev-server --config ./webpack/web-dev.config.js",
-    "server": "nodemon --exec 'ts-node' src/server/server.ts",
+    "server": "nodemon --exec 'ts-node' --watch server src/server/server.ts",
     "web-dev:server": "concurrently \"npm run web-dev\" \"npm run server\"",
     "mocha-test": "mocha --require ts-node/register --require ./config/mochaSetup.ts \"src/**/*.test.{ts,tsx}\"",
     "test": "mocha-webpack --require ts-node/register --require ./config/mocha-webpackSetup.ts --webpack-config ./webpack/mocha-webpack.config.js \"src/**/*.test.{ts,tsx}\"",
