@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux'
 import {
   Action,
   VisibilityFilters,
@@ -5,6 +6,7 @@ import {
   TOGGLE_TODO,
   SET_VISIBILITY_FILTER,
 } from './actions'
+const { SHOW_ALL } = VisibilityFilters
 
 
 const initialState = {
@@ -12,34 +14,74 @@ const initialState = {
   todos: [] as any[]
 }
 
-export function todoApp(state = initialState, action: Action) {
-  switch(action.type) {
+//export function todoApp(state = initialState, action: Action) {
+  //switch(action.type) {
+    //case SET_VISIBILITY_FILTER:
+      //return Object.assign({}, state, {
+        //visibilityFilter: action.filter
+      //})
+    //case ADD_TODO:
+      //return Object.assign({}, state, {
+        //todos: [
+          //...state.todos,
+          //{
+            //text: action.text,
+            //completed: false
+          //}
+        //]
+      //})
+    //case TOGGLE_TODO:
+      //return Object.assign({}, state, {
+        //todos: state.todos.map((todo: any, index: number) => {
+          //if (index === action.index) {
+            //return Object.assign({}, todo, {
+              //completed: !todo.completed
+            //})
+          //}
+          //return todo
+        //})
+      //})
+    //default:
+      //return state
+  //}
+//}
+
+function visibilityFilter(state = SHOW_ALL, action: Action) {
+  switch (action.type) {
     case SET_VISIBILITY_FILTER:
-      return Object.assign({}, state, {
-        visibilityFilter: action.filter
-      })
+      return action.filter
+    default:
+      return state
+  }
+}
+
+function todos(state = [] as any, action: Action) {
+  switch(action.type) {
     case ADD_TODO:
-      return Object.assign({}, state, {
-        todos: [
-          ...state.todos,
-          {
-            text: action.text,
-            completed: false
-          }
-        ]
-      })
+      return [
+        ...state,
+        {
+          text: action.text,
+          completed: false
+        }
+      ]
     case TOGGLE_TODO:
-      return Object.assign({}, state, {
-        todos: state.todos.map((todo: any, index: number) => {
-          if (index === action.index) {
-            return Object.assign({}, todo, {
-              completed: !todo.completed
-            })
-          }
-          return todo
-        })
+      return state.map((todo: any, index: number) => {
+        if (index === action.index) {
+          return Object.assign({}, todo, {
+            completed: !todo.completed
+          })
+        }
+        return todo
       })
     default:
       return state
   }
 }
+
+const todoApp = combineReducers({
+  visibilityFilter,
+  todos
+})
+
+export default todoApp
