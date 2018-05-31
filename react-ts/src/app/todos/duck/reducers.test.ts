@@ -27,6 +27,5 @@ describe('TodoApp set visibility filter', () => {
     let action = todoActions.toggleTodo(0)
     const result = todoApp(todoState, action)
     expect(result.todos[0].completed).to.equal(true)
-    console.log(result)
   })
 })
