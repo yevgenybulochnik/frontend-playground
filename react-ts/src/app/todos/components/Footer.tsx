@@ -2,21 +2,18 @@ import * as React from 'react'
 import FilterLink from '../containers/FilterLink'
 import { VisibilityFilters } from '../duck/actions'
 
-const footer = () => (
+const Footer = () => (
   <p>
-    Show:
-    {' '}
+    <span>Show:</span>
     <FilterLink filter={VisibilityFilters.SHOW_ALL}>
       ALL
     </FilterLink>
-    {' '}
-    <Filterlink filter={VisibilityFilters.SHOW_Active}>
+    <FilterLink filter={VisibilityFilters.SHOW_ACTIVE}>
       Active
-    </Filterlink>
-    {' '}
-    <Filterlink filter={VisibilityFilters.SHOW_COMPLETED}>
+    </FilterLink>
+    <FilterLink filter={VisibilityFilters.SHOW_COMPLETED}>
       Completed
-    </Filterlink>
+    </FilterLink>
   </p>
 )
 
