@@ -1,0 +1,17 @@
+<side-menu></side-menu>
+<div class="pane1">
+  <top-menu></top-menu>
+  <div class="pane2">
+    <div class='calendars'>
+      <div class="cal-container" *ngFor='let calendar of calendars'>
+        <div class="label">{{calendar.name}}</div>
+        <d3-calendar [data]='calendar.data' [domain]='setDomain(calendar.name)'></d3-calendar>
+      </div>
+    </div>
+    <!--<div class='charts'>-->
+      <!--<d3-line-chart class='chart' [chartData]='charts' [chartDataSize]='charts.size' (monthData)='getMonthData($event)'></d3-line-chart>-->
+      <!--<d3-bar-chart class='chart' [selectedMonth]='selectedMonthData'></d3-bar-chart>-->
+    <!--</div>-->
+  </div>
+</div>
+
